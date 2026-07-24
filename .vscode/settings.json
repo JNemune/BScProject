@@ -1,0 +1,30 @@
+{
+    "latex-workshop.latex.recipe.default": "xelatex",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        }
+    ],
+    "latex-workshop.formatting.latex": "latexindent",
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "editor.fontFamily": "'Cascadia Code', 'Consolas', 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.unicodeHighlight.ambiguousCharacters": false
+}
