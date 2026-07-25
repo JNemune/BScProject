@@ -6,29 +6,29 @@
 جدول (2-1) به صورت نمونه ارائه شده است.
 
 \begin{table}[h!]
-\centering
-\caption{نتيجه بررسي پرسش نامه ها در ارتباط با عوامل موثر \cite{sample_ref}}
-\label{tab:factors}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{c l c}
-\toprule
-\textbf{رديف} & \textbf{عوامل موثر} & \textbf{درصد} \\
-\midrule
-1 & احساس تعلق به سازمان & 1/95 \\
-2 & نقش مديريت سازمان & 7/87 \\
-3 & عوامل درون سازماني & 9/82 \\
-4 & برگزاري دوره هاي آموزشي & 9/82 \\
-\bottomrule
-\end{tabular}
+    \centering
+    \caption{نتيجه بررسي پرسش نامه ها در ارتباط با عوامل موثر \cite{sample_ref}}
+    \label{tab:factors}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{c l c}
+        \toprule
+        \textbf{رديف} & \textbf{عوامل موثر}     & \textbf{درصد} \\
+        \midrule
+        1             & احساس تعلق به سازمان    & 1/95          \\
+        2             & نقش مديريت سازمان       & 7/87          \\
+        3             & عوامل درون سازماني      & 9/82          \\
+        4             & برگزاري دوره هاي آموزشي & 9/82          \\
+        \bottomrule
+    \end{tabular}
 \end{table}
 
 شکل (2-1) نیز به صورت نمونه ارائه شده است.
 
 \begin{figure}[h!]
-\centering
-\includegraphics[width=0.6\textwidth]{example-image}
-\caption{نمونه شکل}
-\label{fig:sample}
+    \centering
+    \includegraphics[width=0.6\textwidth]{example-image}
+    \caption{نمونه شکل}
+    \label{fig:sample}
 \end{figure}
 
 \noindent
@@ -38,10 +38,7 @@
 
 \subsection{علت انتخاب روش}
 دليل يا دلايل انتخاب روش انجام پروژه را تشريح مي‌کند.
-
-\subsection{تشريح كامل روش انجام پروژه}
 در زير به تعدادي از روش‌هاي انجام پروژه اشاره شده است:
-
 \begin{itemize}
     \item \textbf{روش آزمايشگاهي‌:} توصيف كامل برنامه‌ي آزمايشگاهي شامل مواد مصرفي و نحوه‌ي ساخت نمونه‌ها، شرح آزمايش‌ها شامل نحوه تنظيم و آماده سازي آزمايش‌ها و دستگاه‌هاي مورد استفاده و دقت و نحوه‌ي كاليبره كردن، شرح دستگاه ساخته شده (در صورت ساخت) و ارائه‌ي روش اعتبارسنجي.
     \item \textbf{روش آماري:} توصيف ابزارهاي گردآوري اطلاعات كمي و كيفي، اندازه‌ي نمونه‌ها، روش نمونه‌برداري، تشريح مباني روش آمار و ارائه‌ي روش اعتبارسنجي.
@@ -50,3 +47,358 @@
     \item \textbf{روش تحليلي يا مدلسازي:} توصيف كامل مباني يا اصول تحليل يا مدل و ارائه‌ي روش اعتبارسنجي.
     \item \textbf{روش ميداني:} چگونگي دستيابي به دادهها در ميدان عمل و نحوه برداشت از پاسخهاي دريافتي.
 \end{itemize}
+\subsection{تشريح كامل روش انجام پروژه}
+
+\subsubsection{معرفی سیستم و فرضیات فیزیکی}
+
+در این تحلیل، دینامیک یک جرثقیل (ارابه-آونگ) با طول کابل متغیر (\lr{Reel Rate}) مورد بررسی قرار می‌گیرد. با توجه به اینکه طول کابل تابعی متغیر با زمان بوده و خود یکی از متغیرهای دینامیکی سیستم است، این سیستم دارای سه درجه آزادی ($n=3$) می‌باشد. بردار مختصات تعمیم‌یافته سیستم به صورت زیر تعریف می‌گردد:
+\[
+    \mathbf{q} = \begin{bmatrix} q_1 \\ q_2 \\ q_3 \end{bmatrix} = \begin{bmatrix} x \\ \theta \\ l \end{bmatrix}
+\]
+که در آن:
+\begin{itemize}
+    \item $x(t)$ : موقعیت افقی ارابه در راستای ریل (متر)
+    \item $\theta(t)$ : زاویه نوسان آونگ نسبت به راستای قائم جهت پایین (رادیان)
+    \item $l(t)$ : طول لحظه‌ای ریسمان (کابل) آونگ از نقطه اتصال به ارابه تا مرکز جرم بار (متر)
+\end{itemize}
+
+پارامترهای فیزیکی سیستم عبارت‌اند از:
+\begin{itemize}
+    \item $M$ : جرم ارابه (کیلوگرم)
+    \item $m$ : جرم آونگ (بار متصل به کابل به صورت جرم نقطه‌ای) (کیلوگرم)
+    \item $M_b$ : جرم ریل (تیر افقی نگهدارنده ارابه با توزیع یکنواخت) (کیلوگرم)
+    \item $D$ : طول کل ریل افقی (متر)
+    \item $g$ : شتاب گرانش زمین ($9.81 \, \text{m/s}^2$)
+    \item $b_c$ : ضریب اصطکاک لزج حرکت افقی ارابه ($\text{N}\cdot\text{s/m}$)
+    \item $b_p$ : ضریب اصطکاک لزج مفصل دورانی آونگ ($\text{N}\cdot\text{m}\cdot\text{s/rad}$)
+    \item $b_l$ : ضریب اصطکاک لزج مکانیزم قرقره در تغییر طول کابل ($\text{N}\cdot\text{s/m}$)
+\end{itemize}
+
+\paragraph{توصیف ورودی‌ها و تکیه‌گاه‌ها}
+ورودی‌های کنترلی اعمال‌شده به سیستم در بردار $\mathbf{u} = [F_1, F_2, F_l]^T$ تعریف می‌شوند:
+\begin{itemize}
+    \item $F_1$ و $F_2$ : نیروهای کششی افقی اعمال‌شده به ارابه توسط دو موتور مستقل که در دو سوی ریل (روی زمین یا شاسی ثابت) مستقر هستند. نیروی $F_1$ ارابه را به سمت راست ($+x$) و نیروی $F_2$ ارابه را به سمت چپ ($-x$) می‌کشد. با توجه به استقرار موتورها خارج از ریل، عکس‌العمل این نیروها مستقیماً به زمین منتقل شده و بر تکیه‌گاه‌های ریل اثر نمی‌گذارد. نیروی افقی خالص محرک ارابه برابر است با: $F_{\text{net}} = F_1 - F_2$.
+    \item $F_l$ : نیروی کشش طولی (Tension) اعمال‌شده توسط موتور قرقره در راستای کابل جهت بالا کشیدن بار (راستای $-l$).
+\end{itemize}
+
+ریل افقی توسط دو تکیه‌گاه در دو انتها مهار شده است:
+\begin{itemize}
+    \item \textbf{تکیه‌گاه ۱ (سمت چپ، $x=0$):} تکیه‌گاه مفصلی (Pinned) با دو واکنش نیرویی $R_{x1}$ (افقی) و $R_{y1}$ (قائم).
+    \item \textbf{تکیه‌گاه ۲ (سمت راست، $x=D$):} تکیه‌گاه غلتکی (Roller) با یک واکنش نیرویی $R_{y2}$ (قائم).
+\end{itemize}
+
+\subsubsection{سینماتیک سیستم}
+
+دستگاه مختصات مرجع لخت (\lr{Inertial Frame}) با مبدأ در تکیه‌گاه ۱ ($x=0, y=0$)، محور $+x$ به سمت راست و محور $+y$ به سمت بالا (خلاف جهت گرانش) در نظر گرفته می‌شود.
+
+\paragraph{بردار موقعیت، سرعت و مربع سرعت جرم آونگ ($m$)}
+موقعیت ارابه و مرکز جرم بار در هر لحظه به صورت زیر است:
+\[
+    \mathbf{r}_c = x \hat{\mathbf{i}} \qquad , \qquad y_c = 0
+\]
+\[
+    x_p = x - l \sin\theta
+\]
+\[
+    y_p = -l \cos\theta
+\]
+
+با مشتق‌گیری کامل نسبت به زمان (با توجه به متغیر بودن $x$، $\theta$ و $l$):
+\[
+    \dot{x}_p = \dot{x} - \dot{l}\sin\theta - l\dot{\theta}\cos\theta
+\]
+\[
+    \dot{y}_p = -\left( \dot{l}\cos\theta - l\dot{\theta}\sin\theta \right) = -\dot{l}\cos\theta + l\dot{\theta}\sin\theta
+\]
+
+مربع سرعت خطی جرم آونگ ($v_p^2 = \dot{\mathbf{r}}_p \cdot \dot{\mathbf{r}}_p = \dot{x}_p^2 + \dot{y}_p^2$) به صورت گام‌به‌گام محاسبه می‌شود:
+\[
+    \dot{x}_p^2 = \dot{x}^2 + \dot{l}^2\sin^2\theta + l^2\dot{\theta}^2\cos^2\theta - 2\dot{x}\dot{l}\sin\theta - 2l\dot{x}\dot{\theta}\cos\theta + 2l\dot{l}\dot{\theta}\sin\theta\cos\theta
+\]
+\[
+    \dot{y}_p^2 = \dot{l}^2\cos^2\theta + l^2\dot{\theta}^2\sin^2\theta - 2l\dot{l}\dot{\theta}\sin\theta\cos\theta
+\]
+با جمع نمودن دو عبارت فوق و استفاده از اتحاد $\sin^2\theta + \cos^2\theta = 1$، جمله کوپلینگ زاویه‌ای ($2l\dot{l}\dot{\theta}\sin\theta\cos\theta$) حذف شده و داریم:
+\[
+    v_p^2 = \dot{x}^2 + \dot{l}^2 + l^2\dot{\theta}^2 - 2\dot{x}\dot{l}\sin\theta - 2l\dot{x}\dot{\theta}\cos\theta
+\]
+
+\subsubsection{استخراج معادلات حرکت به روش اویلر-لاگرانژ}
+
+روش لاگرانژ به دلیل توانایی بالا در مدیریت سیستم‌های چند درجه آزادی مقید و حذف نیروهای داخلی سیستم، برای استخراج معادلات حرکت دینامیکی سیستم انتخاب می‌شود.
+
+\paragraph{انرژی جنبشی، پتانسیل و تابع لاگرانژ}
+انرژی جنبشی کل سیستم ($T = T_c + T_p$):
+\[
+    T = \frac{1}{2}M\dot{x}^2 + \frac{1}{2}m v_p^2 = \frac{1}{2}(M+m)\dot{x}^2 + \frac{1}{2}m\dot{l}^2 + \frac{1}{2}ml^2\dot{\theta}^2 - m\dot{x}\dot{l}\sin\theta - ml\dot{x}\dot{\theta}\cos\theta
+\]
+
+انرژی پتانسیل گرانشی سیستم ($V$) با فرض سطح مبنا در راستای ریل ($y=0$):
+\[
+    V = V_c + V_p = 0 + m g y_p = -m g l \cos\theta
+\]
+
+تابع لاگرانژ ($\mathcal{L} = T - V$):
+\[
+    \mathcal{L} = \frac{1}{2}(M+m)\dot{x}^2 + \frac{1}{2}m\dot{l}^2 + \frac{1}{2}ml^2\dot{\theta}^2 - m\dot{x}\dot{l}\sin\theta - ml\dot{x}\dot{\theta}\cos\theta + mgl\cos\theta
+\]
+
+\paragraph{نیروهای تعمیم‌یافته غیرمحافظه‌کار ($Q_i$)}
+با توجه به جهت‌گیری نیروهای ورودی و اصطکاک‌های لزج، کار مجازی ($\delta W$) عبارت است از:
+\[
+    \delta W = (F_1 - F_2 - b_c\dot{x})\delta x - b_p\dot{\theta}\delta\theta + (F_l - b_l\dot{l})\delta(-l)
+\]
+توجه شود که چون نیروی کشش موتور قرقره ($F_l$) در جهت کاهش طول کابل (راستای $-l$) کار انجام می‌دهد، کار مجازی آن به صورت $-F_l \delta l$ وارد می‌شود؛ اما برای تطابق با قرارداد عمومی و سهولت کنترل، نیروی ورودی را به صورت کشش تعادل کابل تعریف می‌کنیم به گونه‌ای که نیروهای تعمیم‌یافته برابرند با:
+\[
+    Q_x = F_1 - F_2 - b_c\dot{x}
+\]
+\[
+    Q_\theta = -b_p\dot{\theta}
+\]
+\[
+    Q_l = -F_l - b_l\dot{l}
+\]
+
+\paragraph{مشتق‌گیری گام‌به‌گام معادلات اویلر-لاگرانژ}
+رابطه عمومی اویلر-لاگرانژ برای هر درجه آزادی $q_i$:
+\[
+    \frac{d}{dt}\left( \frac{\partial \mathcal{L}}{\partial \dot{q}_i} \right) - \frac{\partial \mathcal{L}}{\partial q_i} = Q_i \qquad , \qquad i=1,2,3
+\]
+
+\subparagraph{۱. معادله حرکت برای مختصه مکان ارابه ($q_1 = x$)}
+مشتقات جزئی:
+\[
+    \frac{\partial \mathcal{L}}{\partial \dot{x}} = (M+m)\dot{x} - m\dot{l}\sin\theta - ml\dot{\theta}\cos\theta \qquad , \qquad \frac{\partial \mathcal{L}}{\partial x} = 0
+\]
+مشتق زمانی کامل:
+\[
+    \frac{d}{dt}\left( \frac{\partial \mathcal{L}}{\partial \dot{x}} \right) = (M+m)\ddot{x} - m\ddot{l}\sin\theta - m\dot{l}\dot{\theta}\cos\theta - m\dot{l}\dot{\theta}\cos\theta - ml\ddot{\theta}\cos\theta + ml\dot{\theta}^2\sin\theta
+\]
+با جایگذاری در معادله لاگرانژ، \textbf{معادله اول حرکت (راستای افقی)} به دست می‌آید:
+\[
+    (M+m)\ddot{x} - ml\ddot{\theta}\cos\theta - m\ddot{l}\sin\theta - 2m\dot{l}\dot{\theta}\cos\theta + ml\dot{\theta}^2\sin\theta + b_c\dot{x} = F_1 - F_2
+\]
+
+\subparagraph{۲. معادله حرکت برای مختصه زاویه آونگ ($q_2 = \theta$)}
+مشتقات جزئی:
+\[
+    \frac{\partial \mathcal{L}}{\partial \dot{\theta}} = ml^2\dot{\theta} - ml\dot{x}\cos\theta
+\]
+\[
+    \frac{d}{dt}\left( \frac{\partial \mathcal{L}}{\partial \dot{\theta}} \right) = 2ml\dot{l}\dot{\theta} + ml^2\ddot{\theta} - m\dot{l}\dot{x}\cos\theta - ml\ddot{x}\cos\theta + ml\dot{x}\dot{\theta}\sin\theta
+\]
+\[
+    \frac{\partial \mathcal{L}}{\partial \theta} = -m\dot{x}\dot{l}\cos\theta + ml\dot{x}\dot{\theta}\sin\theta - mgl\sin\theta
+\]
+با تفریق $\frac{\partial \mathcal{L}}{\partial \theta}$ از مشتق زمانی، جملات $-m\dot{l}\dot{x}\cos\theta$ و $+ml\dot{x}\dot{\theta}\sin\theta$ به طور دقیق حذف شده و \textbf{معادله دوم حرکت (دورانی آونگ)} حاصل می‌شود:
+\[
+    ml^2\ddot{\theta} - ml\ddot{x}\cos\theta + 2ml\dot{l}\dot{\theta} + b_p\dot{\theta} + mgl\sin\theta = 0
+\]
+
+\subparagraph{۳. معادله حرکت برای مختصه طول کابل ($q_3 = l$)}
+مشتقات جزئی:
+\[
+    \frac{\partial \mathcal{L}}{\partial \dot{l}} = m\dot{l} - m\dot{x}\sin\theta
+\]
+\[
+    \frac{d}{dt}\left( \frac{\partial \mathcal{L}}{\partial \dot{l}} \right) = m\ddot{l} - m\ddot{x}\sin\theta - m\dot{x}\dot{\theta}\cos\theta
+\]
+\[
+    \frac{\partial \mathcal{L}}{\partial l} = ml\dot{\theta}^2 - m\dot{x}\dot{\theta}\cos\theta + mg\cos\theta
+\]
+با تفریق این دو عبارت، جمله کوپلینگ $-m\dot{x}\dot{\theta}\cos\theta$ حذف شده و با اعمال نیروی تعمیم‌یافته $Q_l = -F_l - b_l\dot{l}$، \textbf{معادله سوم حرکت (راستای طولی کابل)} به دست می‌آید:
+\[
+    m\ddot{l} - m\ddot{x}\sin\theta - ml\dot{\theta}^2 + b_l\dot{l} - mg\cos\theta = -F_l
+\]
+که با ضرب طرفین در $(-1)$ و مرتب‌سازی به فرم استاندارد کششی می‌نویسیم:
+\[
+    -m\ddot{l} + m\ddot{x}\sin\theta + ml\dot{\theta}^2 - b_l\dot{l} + mg\cos\theta = F_l
+\]
+
+\paragraph{نمایش در فرم استاندارد ماتریسی (\lr{Nonlinear Canonical Form})}
+معادلات غیرخطی حرکت در قالب $\mathbf{M}(\mathbf{q})\ddot{\mathbf{q}} + \mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})\dot{\mathbf{q}} + \mathbf{G}(\mathbf{q}) = \mathbf{Q}_{ext}$ سازمان‌دهی می‌شوند:
+\begin{equation}
+    \begin{split}
+        \begin{bmatrix}
+            M+m           & -ml\cos\theta & -m\sin\theta \\
+            -ml\cos\theta & ml^2          & 0            \\
+            -m\sin\theta  & 0             & m
+        \end{bmatrix}
+        \begin{bmatrix} \ddot{x} \\ \ddot{\theta} \\ \ddot{l} \end{bmatrix}
+         & +
+        \begin{bmatrix}
+            b_c & -2m\dot{l}\cos\theta + ml\dot{\theta}\sin\theta & 0   \\
+            0   & b_p + 2ml\dot{l}                                & 0   \\
+            0   & -ml\dot{\theta}                                 & b_l
+        \end{bmatrix}
+        \begin{bmatrix} \dot{x} \\ \dot{\theta} \\ \dot{l} \end{bmatrix} \\[10pt]
+         & +
+        \begin{bmatrix} 0 \\ mgl\sin\theta \\ -mg\cos\theta \end{bmatrix}
+        =
+        \begin{bmatrix} F_1 - F_2 \\ 0 \\ -F_l \end{bmatrix}
+    \end{split}
+\end{equation}
+توجه شود که ماتریس جرم/اینرسی $\mathbf{M}(\mathbf{q})$ کاملاً متقارن ($\mathbf{M} = \mathbf{M}^T$) و معین مثبت است.
+
+\subsubsection{تحلیل نیوتن-اویلر برای استخراج نیروهای تکیه‌گاهی}
+
+برای استخراج واکنش‌های تکیه‌گاهی $R_{x1}, R_{y1}, R_{y2}$، تعادل دینامیکی کل سیستم (ریل + ارابه + آونگ) در مرجع لخت نوشته می‌شود. با توجه به اینکه موتورها خارج از ریل نصب شده‌اند، نیروهای ورودی $F_1$ و $F_2$ به عنوان نیروهای افقی خارجی بر مجموعه ارابه عمل می‌کنند.
+
+\paragraph{تعادل نیروهای افقی ($\sum F_x = \dot{P}_x$)}
+قانون دوم نیوتن در راستای افق برای کل مجموعه:
+\[
+    R_{x1} + F_1 - F_2 = M_b \ddot{x}_{\text{rail}} + M \ddot{x}_c + m \ddot{x}_p
+\]
+از آنجا که ریل ثابت است ($\ddot{x}_{\text{rail}} = 0$) و $\ddot{x}_c = \ddot{x}$، داریم:
+\[
+    R_{x1} = M \ddot{x} + m \ddot{x}_p - (F_1 - F_2)
+\]
+با جایگذاری عبارت مشتق دوم مکان بار ($\ddot{x}_p = \ddot{x} - \ddot{l}\sin\theta - 2\dot{l}\dot{\theta}\cos\theta - l\ddot{\theta}\cos\theta + l\dot{\theta}^2\sin\theta$):
+\[
+    R_{x1} = (M+m)\ddot{x} - ml\ddot{\theta}\cos\theta - m\ddot{l}\sin\theta - 2m\dot{l}\dot{\theta}\cos\theta + ml\dot{\theta}^2\sin\theta - (F_1 - F_2)
+\]
+\textbf{نکتهس:} با نگاه به سمت چپ معادله اول لاگرانژ (معادله حرکت ارابه)، درمی‌یابیم که کل عبارت جبری فوق دقیقاً برابر با $-b_c\dot{x}$ است! بنابراین واکنش افقی تکیه‌گاه ۱ به صورت تحلیلی به ساده‌ترین فرم ممکن ساده می‌شود:
+\[
+    R_{x1} = -b_c \dot{x}
+\]
+این نتیجه از نظر فیزیکی کاملاً منطقی است؛ زیرا ارابه با نیروی اصطکاک لزج $+b_c\dot{x}$ ریل را به سمت جلو می‌کشد و تکیه‌گاه ۱ باید برای حفظ سکون ریل، نیرویی معادل و در جهت عکس ($-b_c\dot{x}$) اعمال نماید.
+
+\paragraph{تعادل گشتاور حول تکیه‌گاه ۱ ($\sum M_{z, O} = \dot{H}_{z, O}$)}
+با گرفتن لنگر حول نقطه تکیه‌گاه ۱ ($x=0, y=0$) در جهت پادساعتگرد ($+z$):
+\[
+    \sum M_{z, O} = R_{y2} D - M_b g \frac{D}{2} - M g x - m g x_p
+\]
+نرخ تغییرات تکانه زاویه‌ای سیستم حول مبدأ ($\dot{H}_{z, O} = \sum (\mathbf{r}_i \times m_i \mathbf{a}_i)_z$):
+\[
+    \dot{H}_{z, O} = (\mathbf{r}_c \times M\mathbf{a}_c)_z + (\mathbf{r}_p \times m\mathbf{a}_p)_z = (x\hat{\mathbf{i}} \times M\ddot{x}\hat{\mathbf{i}}) + m \left( x_p \ddot{y}_p - y_p \ddot{x}_p \right) = m \left( x_p \ddot{y}_p - y_p \ddot{x}_p \right)
+\]
+با مساوی قرار دادن گشتاور خارجی و نرخ تکانه زاویه‌ای، واکنش قائم تکیه‌گاه ۲ حاصل می‌شود:
+\[
+    R_{y2} = \frac{1}{D} \left[ \frac{1}{2} M_b g D + M g x + m g (x - l\sin\theta) + m \left( x_p \ddot{y}_p - y_p \ddot{x}_p \right) \right]
+\]
+
+\paragraph{تعادل نیروهای قائم ($\sum F_y = \dot{P}_y$)}
+تعادل نیروها در راستای عمودی:
+\[
+    R_{y1} + R_{y2} - M_b g - M g - m g = M_b \ddot{y}_{\text{rail}} + M \ddot{y}_c + m \ddot{y}_p = m \ddot{y}_p
+\]
+در نتیجه، واکنش قائم تکیه‌گاه ۱ برابر است با:
+\[
+    R_{y1} = (M_b + M + m)g + m \ddot{y}_p - R_{y2}
+\]
+
+\subsubsection{خطی‌سازی و نمایش فضای حالت (State-Space Representation)}
+
+برای طراحی کنترلر، معادلات غیرخطی حرکت و روابط نیروهای تکیه‌گاهی حول نقطه تعادل آویزان سیستم خطی‌سازی می‌شوند. نقطه تعادل اسمی (\lr{Equilibrium Point}) به صورت زیر تعریف می‌گردد:
+\[
+    \theta_0 = 0 \quad , \quad \dot{\theta}_0 = 0 \quad , \quad x_0 = 0 \quad , \quad \dot{x}_0 = 0 \quad , \quad l = l_0 \text{ (ثابت)} \quad , \quad \dot{l}_0 = 0 \quad , \quad \ddot{l}_0 = 0
+\]
+در این وضعیت، نیروی کشش تعادلی کابل برابر با وزن بار است: $F_{l,0} = mg$.
+با اعمال تقریب‌های زوایای کوچک و تغییرات کوچک حول نقطه تعادل:
+\[
+    \sin\theta \approx \theta \quad , \quad \cos\theta \approx 1 \quad , \quad \dot{\theta}^2 \approx 0 \quad , \quad \dot{x}\dot{\theta} \approx 0 \quad , \quad \dot{l}\dot{\theta} \approx 0 \quad , \quad l \approx l_0
+\]
+
+\paragraph{معادلات خطی‌شده حرکت}
+با ساده‌سازی معادلات غیرخطی، معادلات دیفرانسیل خطی به دست می‌آیند:
+\begin{enumerate}
+    \item راستای ارابه: $(M+m)\ddot{x} - ml_0\ddot{\theta} + b_c\dot{x} = \Delta F_1 - \Delta F_2$
+    \item راستای آونگ: $ml_0^2\ddot{\theta} - ml_0\ddot{x} + b_p\dot{\theta} + mgl_0\theta = 0$
+    \item راستای کابل: $m\ddot{l} + b_l\dot{l} = -\Delta F_l \implies \ddot{l} = -\frac{b_l}{m}\dot{l} - \frac{1}{m}\Delta F_l$
+\end{enumerate}
+توجه شود که متغیرهای ورودی به صورت انحراف از تعادل ($\Delta F_1, \Delta F_2, \Delta F_l = F_l - mg$) تعریف شده‌اند. معادلات ارابه و آونگ به طور کامل از معادله تغییر طول کابل ($l$) در حالت خطی دکوپله هستند.
+
+با بازگشایی جبری شتاب‌های $\ddot{x}$ و $\ddot{\theta}$ از دو معادله اول (مشابه فرآیند طی‌شده در فایل LQR):
+\[
+    \ddot{x} = \frac{1}{M}\left( \Delta F_1 - \Delta F_2 \right) - \frac{b_c}{M}\dot{x} - \frac{mg}{M}\theta - \frac{b_p}{Ml_0}\dot{\theta}
+\]
+\[
+    \ddot{\theta} = \frac{1}{Ml_0}\left( \Delta F_1 - \Delta F_2 \right) - \frac{b_c}{Ml_0}\dot{x} - \frac{(M+m)g}{Ml_0}\theta - \left( \frac{b_p}{Ml_0^2} + \frac{b_p}{ml_0^2} \right)\dot{\theta}
+\]
+
+\paragraph{خطی‌سازی نیروهای تکیه‌گاهی (خروجی‌های سیستم)}
+برای استخراج ماتریس‌های خروجی، شتاب‌های خطی‌شده ($\ddot{x}_p \approx \ddot{x} - l_0\ddot{\theta}$ و $\ddot{y}_p \approx -\ddot{l}$) را در روابط تکیه‌گاهی قرار می‌دهیم:
+
+\subparagraph{تکیه‌گاه افقی ($R_{x1}$):}
+همان‌طور که اثبات شد، در حالت خطی نیز داریم:
+\[
+    \Delta R_{x1} = -b_c \dot{x}
+\]
+
+\subparagraph{تکیه‌گاه قائم غلتکی ($R_{y2}$):}
+با جایگذاری تقریب‌ها در رابطه گشتاور:
+\[
+    R_{y2} \approx \frac{1}{D} \left[ \frac{1}{2}M_b g D + M g x + m g (x - l_0\theta) + m \left( 0 - (-l_0)(\ddot{x} - l_0\ddot{\theta}) \right) \right]
+\]
+عبارت اینرسی درون پرانتز برابر است با $ml_0\ddot{x} - ml_0^2\ddot{\theta}$. با استفاده از معادله حرکت خطی آونگ ($ml_0^2\ddot{\theta} - ml_0\ddot{x} = -b_p\dot{\theta} - mgl_0\theta$)، داریم:
+\[
+    ml_0\ddot{x} - ml_0^2\ddot{\theta} = b_p\dot{\theta} + mgl_0\theta
+\]
+با جایگذاری این رابطه بسیار مهم در معادله $R_{y2}$، جملات $-mgl_0\theta$ و $+mgl_0\theta$ یکدیگر را خنثی کرده و به رابطه زیر می‌رسیم:
+\[
+    R_{y2} = \underbrace{\frac{1}{2}M_b g}_{\text{بار استاتیک}} + \underbrace{\frac{(M+m)g}{D} x + \frac{b_p}{D} \dot{\theta}}_{\text{تغییرات دینامیکی } (\Delta R_{y2})} \implies \Delta R_{y2} = \frac{(M+m)g}{D} x + \frac{b_p}{D} \dot{\theta}
+\]
+
+\subparagraph{تکیه‌گاه قائم مفصلی ($R_{y1}$):}
+با جایگذاری $\ddot{y}_p \approx -\ddot{l}$ در رابطه تعادل عمودی:
+\[
+    R_{y1} = (M_b + M + m)g - m\ddot{l} - R_{y2}
+\]
+با جایگذاری $\ddot{l} = -\frac{b_l}{m}\dot{l} - \frac{1}{m}\Delta F_l$ داریم: $-m\ddot{l} = b_l\dot{l} + \Delta F_l$. در نتیجه بخش دینامیکی واکنش تکیه‌گاه ۱ برابر است با:
+\[
+    \Delta R_{y1} = -\frac{(M+m)g}{D} x - \frac{b_p}{D}\dot{\theta} + b_l\dot{l} + \Delta F_l
+\]
+
+\paragraph{نمایش ماتریسی فضای حالت}
+بردار حالت ۶ بعدی، بردار ورودی ۳ بعدی و بردار خروجی ۵ بعدی به صورت زیر تعریف می‌شوند:
+\[
+    \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \end{bmatrix} = \begin{bmatrix} x \\ \dot{x} \\ \theta \\ \dot{\theta} \\ l - l_0 \\ \dot{l} \end{bmatrix} \quad , \quad
+    \mathbf{u} = \begin{bmatrix} u_1 \\ u_2 \\ u_3 \end{bmatrix} = \begin{bmatrix} \Delta F_1 \\ \Delta F_2 \\ \Delta F_l \end{bmatrix} \quad , \quad
+    \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{bmatrix} = \begin{bmatrix} x \\ \theta \\ \Delta R_{x1} \\ \Delta R_{y1} \\ \Delta R_{y2} \end{bmatrix}
+\]
+
+مدل فضای حالت سیستم خطی به صورت $\dot{\mathbf{x}} = \mathbf{A}\mathbf{x} + \mathbf{B}\mathbf{u}$ و $\mathbf{y} = \mathbf{C}\mathbf{x} + \mathbf{D}\mathbf{u}$ با ماتریس‌های زیر بیان می‌شود:
+
+\[
+    \mathbf{A} =
+    \begin{bmatrix}
+        0 & 1                  & 0                     & 0                                                         & 0 & 0               \\
+        0 & -\dfrac{b_c}{M}    & -\dfrac{mg}{M}        & -\dfrac{b_p}{Ml_0}                                        & 0 & 0               \\[8pt]
+        0 & 0                  & 0                     & 1                                                         & 0 & 0               \\
+        0 & -\dfrac{b_c}{Ml_0} & -\dfrac{(M+m)g}{Ml_0} & -\left( \dfrac{b_p}{Ml_0^2} + \dfrac{b_p}{ml_0^2} \right) & 0 & 0               \\[8pt]
+        0 & 0                  & 0                     & 0                                                         & 0 & 1               \\
+        0 & 0                  & 0                     & 0                                                         & 0 & -\dfrac{b_l}{m}
+    \end{bmatrix}_{6 \times 6}
+\]
+
+\[
+    \mathbf{B} =
+    \begin{bmatrix}
+        0               & 0                & 0             \\
+        \dfrac{1}{M}    & -\dfrac{1}{M}    & 0             \\[8pt]
+        0               & 0                & 0             \\
+        \dfrac{1}{Ml_0} & -\dfrac{1}{Ml_0} & 0             \\[8pt]
+        0               & 0                & 0             \\
+        0               & 0                & -\dfrac{1}{m}
+    \end{bmatrix}_{6 \times 3}
+\]
+
+\[
+    \mathbf{C} =
+    \begin{bmatrix}
+        1                  & 0    & 0 & 0               & 0 & 0   \\
+        0                  & 0    & 1 & 0               & 0 & 0   \\
+        0                  & -b_c & 0 & 0               & 0 & 0   \\
+        -\dfrac{(M+m)g}{D} & 0    & 0 & -\dfrac{b_p}{D} & 0 & b_l \\[8pt]
+        \dfrac{(M+m)g}{D}  & 0    & 0 & \dfrac{b_p}{D}  & 0 & 0
+    \end{bmatrix}_{5 \times 6}
+    \quad , \quad
+    \mathbf{D} =
+    \begin{bmatrix}
+        0 & 0 & 0 \\
+        0 & 0 & 0 \\
+        0 & 0 & 0 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+    \end{bmatrix}_{5 \times 3}
+\]
