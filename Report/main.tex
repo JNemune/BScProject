@@ -1,26 +1,47 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[14pt,a4paper]{extreport}
 
-% --- Page Geometry & Academic Margins ---
-\usepackage[top=3cm,bottom=3cm,left=2.5cm,right=3.5cm]{geometry}
+% --- ۱. حاشیه‌های دقیق ۲.۵۴ سانتی‌متری (1 inch) طبق اسکرین‌شات ورد ---
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.54cm, right=2.54cm, headsep=0.7cm, footskip=0.7cm]{geometry}
 
-% --- Line Spacing ---
+% --- ۲. فاصله خطوط دقیقاً روی 1.2 طبق اسکرین‌شات ورد ---
 \usepackage{setspace}
-\setstretch{1.3} % Standard Persian academic line spacing
+\setstretch{1.2}
 
-% --- Core Utilities & Tables ---
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{amsmath,amssymb}
 
-% --- Caption Configuration (Tables Above, Figures Below) ---
+% --- ۳. تنظیمات دقیق زیرنویس عکس‌ها و بالانویس جدول‌ها ---
 \usepackage{caption}
-\captionsetup[table]{position=top,skip=6pt}
-\captionsetup[figure]{position=bottom,skip=6pt}
+\captionsetup{
+    font={small,bf},          % فونت یک سایز کوچک‌تر از متن و بولد (معادل سایز ۱۲ در سند ۱۴)
+    labelfont=bf,             % پررنگ بودن کلمه "شکل ۲-۱:" یا "جدول ۲-۱:"
+    labelsep=space,           % فاصله خالی به جای نقطه یا دو نقطه بعد از شماره شکل
+    justification=centering,  % وسط‌چین بودن کپشن‌ها
+    skip=6pt                  % فاصله ۶ پوینت بین تصویر/جدول و متن کپشن
+}
+\captionsetup[table]{position=top}     % بالانویس بودن جدول
+\captionsetup[figure]{position=bottom} % زیرنویس بودن عکس
+
+% --- ۴. تنظیمات فاصله قبل و بعد از تیترها (Before: 12pt, After: 3pt) ---
+\usepackage{titlesec}
+\titlespacing*{\chapter}{0pt}{18pt}{12pt}      % عنوان فصل‌ها کمی فضای تنفسی بیشتر نیاز دارند
+\titlespacing*{\section}{0pt}{12pt}{3pt}       % دقیقاً منطبق با عکس ورد شما
+\titlespacing*{\subsection}{0pt}{12pt}{3pt}    % دقیقاً منطبق با عکس ورد شما
+\titlespacing*{\subsubsection}{0pt}{12pt}{3pt} % دقیقاً منطبق با عکس ورد شما
+
+% --- ۵. تنظیمات زیبایی‌شناسی فهرست مطالب، اشکال و جداول ---
+\usepackage{tocloft}
+\setlength{\cftbeforechapskip}{8pt} % فاصله عمودی بین عنوان فصل‌ها در فهرست مطالب
+\setlength{\cftbeforesecskip}{4pt}  % فاصله عمودی بین بخش‌ها در فهرست مطالب
+\renewcommand{\cfttoctitlefont}{\titrfont\fontsize{18}{24}\selectfont\textbf} % فونت تیتر "فهرست مطالب"
+\renewcommand{\cftloftitlefont}{\titrfont\fontsize{18}{24}\selectfont\textbf} % فونت تیتر "فهرست اشکال"
+\renewcommand{\cftlottitlefont}{\titrfont\fontsize{18}{24}\selectfont\textbf} % فونت تیتر "فهرست جداول"
 
 % ------------------------------------------------------------------------------
-% XePersian Package (MUST BE LOADED LAST)
+% فراخوانی زی‌پرشین (حتمًا و الزاماً آخرین بسته باشد)
 % ------------------------------------------------------------------------------
 \usepackage{xepersian}
 

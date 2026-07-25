@@ -1,54 +1,85 @@
+\clearpage
 \pagenumbering{harfi}
-\pagestyle{empty}
-
-% --- Dedication ---
-\clearpage
-\section*{تقديم به: (اختياري)}
-\addcontentsline{toc}{section}{تقديم به}
-\vspace{1cm}
-در این صفحه دانشجو در صورت تمایل می تواند پروژه خود را به شخص یا اشخاصی تقدیم کند.
-
-% --- Acknowledgments ---
-\clearpage
-\section*{تشكر و قدرداني: (اختياري)}
-\addcontentsline{toc}{section}{تشكر و قدرداني}
-\vspace{1cm}
-در این قسمت دانشجو می تواند در صورت تمایل از شخص یا اشخاصی که وی را در راستای انجام پروژه تخصصی یاری رسانده اند، تقدیر و تشکر نماید.
-
-% --- Abstract ---
-\clearpage
-\section*{چکيده}
-\addcontentsline{toc}{section}{چکيده}
-\vspace{0.5cm}
-هر گزارش پروژه یا هر پایان نامه ای با چکیده آغاز می شود كه عبارت است از توضیح راجع به موضوع پروژه، شيوه ها و روش انجام پروژه و نتيجه نهایی. كلمات يا عباراتي كه در اين بخش توضيح داده مي‌شود، بايد كاملاً محوري و مرتبط با موضوع پروژه باشند. در متن چکيده، از ارجاع به منابع و اشاره به جداول و نمودارها اجتناب شود.
-
-\vspace{1cm}
-\noindent\textbf{واژه‌هاي كليدي:} تعداد كلمات يا عبارات كليدي حداكثر مي‌تواند پنج كلمه يا عبارت باشد.
-
-% --- Automated TOC, LOF, LOT ---
-\clearpage
+\setcounter{page}{1}
 \pagestyle{plain}
+
+% --- صفحه تقدیم به ---
+\mbox{}\\
+\noindent{\fontsize{16}{22}\selectfont\textbf{تقدیم به}}
+\addcontentsline{toc}{section}{تقدیم به}
+
+% \vspace{2.5cm}
+
+% \begin{center}
+%     {\fontsize{16}{24}\selectfont\textbf{پدر و مادر عزیزم؛}}\\[0.6cm]
+%     {\fontsize{14}{22}\selectfont
+%     که با حمایت‌های بی‌دریغ، صبر و شکیبایی، همواره راهنما و پشتوانهٔ من در تمام مراحل زندگی و تحصیل بوده‌اند.
+%     }
+% \end{center}
+
+% --- صفحه تشکر و قدردانی ---
+\clearpage
+\mbox{}\\
+\noindent{\fontsize{16}{22}\selectfont\textbf{تشکر و قدردانی}}
+\addcontentsline{toc}{section}{تشکر و قدردانی}
+
+% \vspace{1.2cm}
+% \noindent
+% بر خود لازم می‌دانم از استاد راهنمای ارجمندم، \textbf{جناب آقای دکتر صدیق}، که با راهنمایی‌های ارزشمند، صبر و شکیبایی، و حمایت‌های بی‌دریغ خود در تمامی مراحل انجام این پروژه راهنما و پشتیبان من بودند، کمال تشکر و قدردانی را داشته باشم.
+
+% \vspace{0.4cm}
+% \noindent
+% همچنین از استاد گرامی و فرهیخته، \textbf{جناب آقای دکتر شریعت‌پناهی}، به پاس رهنمودها و دانش ارزشمندی که در طول دوران تحصیل در اختیار اینجانب قرار دادند، صمیمانه سپاسگزارم.
+
+% \vspace{0.6cm}
+% \noindent
+% برای این اساتید بزرگوار از درگاه خداوند متعال سلامتی و توفیق روزافزون آرزومندم.
+
+% --- صفحه چکیده ---
+\clearpage
+\mbox{}\\% معادل یک خط خالی در اول صفحه مثل ورد
+\noindent{\fontsize{16}{22}\selectfont\textbf{چکیده}}
+\addcontentsline{toc}{section}{چکیده}
+
+\vspace{0.8cm}
+\noindent
+هر گزارش پروژه یا هر پایان‌نامه‌ای با چکیده آغاز می‌شود که عبارت است از توضیح راجع به موضوع پروژه، شیوه‌ها و روش انجام پروژه و نتیجه نهایی. کلمات یا عباراتی که در این بخش توضیح داده می‌شود، باید کاملاً محوری و مرتبط با موضوع پروژه باشند. در متن چکیده، از ارجاع به منابع و اشاره به جداول و نمودارها اجتناب شود.
+
+\vspace{1cm}
+\noindent\textbf{واژه‌های کلیدی:} تعداد کلمات یا عبارات کلیدی حداکثر می‌تواند پنج کلمه یا عبارت باشد.
+
+% --- ۱. صفحه فهرست مطالب ---
+\clearpage
+\mbox{}\\% معادل یک خط خالی در اول صفحه مثل ورد
 \tableofcontents
+
+% --- ۲. صفحه فهرست اشکال ---
 \clearpage
+\mbox{}\\% معادل یک خط خالی در اول صفحه مثل ورد
 \listoffigures
+
+% --- ۳. صفحه فهرست جداول ---
 \clearpage
+\mbox{}\\% معادل یک خط خالی در اول صفحه مثل ورد
 \listoftables
 
-% --- Nomenclature / List of Abbreviations ---
+% --- ۴. صفحه فهرست علائم اختصاری ---
 \clearpage
-\section*{فهرست علائم اختصاري}
-\addcontentsline{toc}{section}{فهرست علائم اختصاري}
-\vspace{0.5cm}
+\mbox{}\\% معادل یک خط خالی در اول صفحه مثل ورد
+\noindent{\fontsize{16}{22}\selectfont\textbf{فهرست علائم اختصاری}}
+\addcontentsline{toc}{section}{فهرست علائم اختصاری}
+\vspace{0.8cm}
+
 \begin{table}[h!]
-\centering
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{l@{\hspace{3cm}}r}
-\toprule
-\textbf{کمیت و واحد} & \textbf{شرح فارسی} \\
-\midrule
-$v \ (\text{m/s})$ & سرعت \\
-$a \ (\text{m/s}^2)$ & شتاب \\
-$F \ (\text{N})$ & نیرو \\
-\bottomrule
-\end{tabular}
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l@{\hspace{3cm}}r}
+        \toprule
+        \textbf{کمیت و واحد} & \textbf{شرح فارسی} \\
+        \midrule
+        $v \ (\text{m/s})$   & سرعت               \\
+        $a \ (\text{m/s}^2)$ & شتاب               \\
+        $F \ (\text{N})$     & نیرو               \\
+        \bottomrule
+    \end{tabular}
 \end{table}
