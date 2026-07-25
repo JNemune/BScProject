@@ -1,0 +1,65 @@
+\documentclass[12pt,a4paper]{report}
+
+% --- Page Geometry & Academic Margins ---
+\usepackage[top=3cm,bottom=3cm,left=2.5cm,right=3.5cm]{geometry}
+
+% --- Line Spacing ---
+\usepackage{setspace}
+\setstretch{1.3} % Standard Persian academic line spacing
+
+% --- Core Utilities & Tables ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{amsmath,amssymb}
+
+% --- Caption Configuration (Tables Above, Figures Below) ---
+\usepackage{caption}
+\captionsetup[table]{position=top,skip=6pt}
+\captionsetup[figure]{position=bottom,skip=6pt}
+
+% ------------------------------------------------------------------------------
+% XePersian Package (MUST BE LOADED LAST)
+% ------------------------------------------------------------------------------
+\usepackage{xepersian}
+
+% --- Font Configurations ---
+% FALLBACK INSTRUCTIONS: 
+% If 'B Nazanin' or 'B Titr' are unavailable on your OS, you can define fallbacks
+% using fontspec file paths or substitute standard alternatives like 'IRANSharp', 
+% 'HM XNazanin', or 'Yas':
+% \settextfont[Path=/path/to/fonts/, Extension=.ttf, BoldFont=*_Bold]{IRANSharp}
+\settextfont[Scale=1.0]{Nazli}
+\setlatintextfont[Scale=1.0]{Times New Roman}
+\setdigitfont[Scale=1.0]{Nazli}
+
+% Custom heading font for cover and chapter titles
+\defpersianfont\titrfont[Scale=1.0]{B Titr}
+
+% Renaming standard LaTeX headings to Persian
+\renewcommand{\bibname}{مراجع}
+
+\begin{document}
+
+% --- Persian Front Cover ---
+\include{cover_fa}
+
+% --- Frontmatter (Dedication, Acknowledgments, Abstract, TOC, Lists) ---
+\include{frontmatter}
+
+% --- Main Body Chapters ---
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+
+% --- Bibliography / References ---
+\include{references}
+
+% --- Appendices ---
+\include{appendix}
+
+% --- English Back Cover ---
+\include{cover_en}
+
+\end{document}
