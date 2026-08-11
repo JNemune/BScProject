@@ -46,14 +46,12 @@
 \usepackage{xepersian}
 
 % --- Font Configurations ---
-% FALLBACK INSTRUCTIONS: 
-% If 'B Nazanin' or 'B Titr' are unavailable on your OS, you can define fallbacks
-% using fontspec file paths or substitute standard alternatives like 'IRANSharp', 
-% 'HM XNazanin', or 'Yas':
-% \settextfont[Path=/path/to/fonts/, Extension=.ttf, BoldFont=*_Bold]{IRANSharp}
 \settextfont[Scale=1.0]{Nazli}
 \setlatintextfont[Scale=1.0]{Times New Roman}
-\setdigitfont[Scale=1.0]{Nazli}
+
+% دستور زیر به جای setdigitfont استفاده می‌شود:
+% فقط اعداد درون متن عادی را فارسی می‌کند و فرمول‌های ریاضی را کاملاً انگلیسی باقی می‌گذارد.
+\settextdigitfont[Scale=1.0]{Nazli}
 
 % Custom heading font for cover and chapter titles
 \defpersianfont\titrfont[Scale=1.0]{B Titr}
@@ -61,6 +59,14 @@
 % Renaming standard LaTeX headings to Persian
 \renewcommand{\bibname}{مراجع}
 
+
+% --- اصلاح شماره‌گذاری تیترها به فرمت استاندارد فارسی (با خط تیره) ---
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\thechapter-\arabic{section}}
+\renewcommand{\thesubsection}{\thesection-\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection-\arabic{subsubsection}}
+\renewcommand{\theparagraph}{\thesubsubsection-\arabic{paragraph}}
+\renewcommand{\thesubparagraph}{\theparagraph-\arabic{subparagraph}}
 \begin{document}
 
 % --- Persian Front Cover ---
