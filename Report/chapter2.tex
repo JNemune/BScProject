@@ -241,3 +241,126 @@
 \subsection{تحلیل تکینگی کنترل‌پذیری در نقطه تعادل}
 
 همان‌طور که در ماتریس‌های فضای حالت خطی‌سازی‌شده مشاهده می‌شود، متغیرهای مربوط به نرخ تغییر طول کابل (\lr{Reel Rate}) یعنی مشتقات \lr{$\dot{l}$} و \lr{$\ddot{l}$} به طور کامل از معادلات \lr{LTI} حذف شده‌اند و طول کابل تنها به صورت مقدار ثابت اسمی \lr{$l_0$} ظاهر شده است. دلیل این امر از منظر ریاضیاتِ خطی‌سازی (بسط تیلور مرتبه اول) این است که در نقطه کار قائم (\lr{$\theta \approx 0$})، ترم‌های کوپلینگ غیرخطی نظیر شتاب کوریولیس (\lr{$2m\dot{l}\dot{\theta}\cos\theta$}) و نیروی اینرسی ناشی از شتاب شعاعی (\lr{$m\ddot{l}\sin\theta$}) به دلیل ضرب شدن دو متغیر اغتشاشی در یکدیگر (جملات مرتبه دوم) و همچنین مقدار \lr{$\sin(0) = 0$}، به صفر میل می‌کنند. از دیدگاه فیزیکی، این پدیده بیانگر یک «تکینگی کنترل‌پذیری» (\lr{Controllability Singularity}) در نقطه تعادل آویزان است؛ بدین معنا که اگر آونگ کاملاً عمود باشد، بالا یا پایین کشیدن کابل هیچ‌گونه نیروی افقی یا گشتاوری برای نوسان ایجاد نمی‌کند. این نتیجه‌گیری اثبات می‌کند که کنترل‌کننده‌های خطی کلاسیک (نظیر \lr{LQR} یا \lr{Linear MPC}) ذاتاً قادر به بهره‌گیری از متغیر تغییر طول کابل جهت میرایی ارتعاشات حول نقطه تعادل نیستند. بنابراین، جهت استفاده‌ی مؤثر از قابلیت \lr{Reel Rate} به عنوان یک ابزار کنترلی (\lr{Active Damping})، عبور از مدل خطی و به‌کارگیری مدل کاملاً غیرخطی سیستم در قالب استراتژی‌های پیشرفته‌ای همچون کنترل‌کننده پیش‌بین مدل غیرخطی (\lr{NMPC}) امری الزامی و غیرقابل‌اجتناب است.
+
+
+\section{مدل فضای حالت غیرخطی جهت طراحی کنترل‌کننده پیش‌بین \lr{(NMPC)}}
+
+به منظور پیاده‌سازی کنترل‌کننده پیش‌بین مدل غیرخطی \lr{(NMPC)}، نیازمند استخراج دقیق مدل دینامیکی به فرم آفینِ غیرخطی \lr{(Nonlinear Control-Affine)} هستیم:
+\[
+    \dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}) + \mathbf{g}(\mathbf{x})\mathbf{u}
+\]
+در این فرمولاسیون، طول کابل (\lr{$l$}) از حالت پارامتر خارج شده و مستقیماً به عنوان متغیر حالت و شتاب آن (\lr{$\ddot{l}$}) به عنوان ورودی کنترلی وارد سیستم می‌شود.
+
+\subsection{بازآرایی معادلات به فرم ماتریسی \lr{(Inertia Matrix)}}
+معادلات حرکت استخراج‌شده در بخش قبل را بازنویسی می‌کنیم. هدف، جداسازی شتاب‌های درجات آزادی (\lr{$\ddot{x}$} و \lr{$\ddot{\theta}$}) در یک سمت تساوی است:
+\[
+    (M+m)\ddot{x} + ml\cos\theta\ddot{\theta} = F_1 + F_2 - b_c\dot{x} - m\ddot{l}\sin\theta - 2m\dot{l}\dot{\theta}\cos\theta + ml\dot{\theta}^2\sin\theta
+\]
+\[
+    ml\cos\theta\ddot{x} + ml^2\ddot{\theta} = -2ml\dot{l}\dot{\theta} - mgl\sin\theta - b_p\dot{\theta}
+\]
+با تعریف بردار مختصات تعمیم‌یافته \lr{$\mathbf{q} = [x, \theta]^T$}، معادلات را به فرم استاندارد \lr{$\mathbf{M}(\mathbf{q})\ddot{\mathbf{q}} = \mathbf{RHS}$} می‌نویسیم:
+\[
+    \begin{bmatrix}
+        M+m          & ml\cos\theta \\
+        ml\cos\theta & ml^2
+    \end{bmatrix}
+    \begin{bmatrix}
+        \ddot{x} \\ \ddot{\theta}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        - 2m\dot{l}\dot{\theta}\cos\theta + ml\dot{\theta}^2\sin\theta - b_c\dot{x} \\
+        -2ml\dot{l}\dot{\theta} - mgl\sin\theta - b_p\dot{\theta}
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        1 & 1 & -m\sin\theta \\
+        0 & 0 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        F_1 \\ F_2 \\ \ddot{l}
+    \end{bmatrix}
+\]
+که در آن ترم سمت راست به دو بخش نیروهای بایاس (\lr{$\mathbf{f}_{bias}$}) و ماتریس توزیع ورودی (\lr{$\mathbf{B}_u\mathbf{u}$}) تفکیک شده است.
+
+\subsection{معکوس‌گیری ماتریس جرم و استخراج شتاب‌ها}
+برای یافتن شتاب‌ها، ابتدا دترمینان ماتریس جرم \lr{$\mathbf{M}(\mathbf{q})$} را محاسبه می‌کنیم:
+\[
+    |\mathbf{M}| = (M+m)(ml^2) - (ml\cos\theta)^2 = Mml^2 + m^2l^2 - m^2l^2\cos^2\theta
+\]
+با استفاده از اتحاد \lr{$\sin^2\theta + \cos^2\theta = 1$}:
+\[
+    |\mathbf{M}| = ml^2(M + m\sin^2\theta)
+\]
+معکوس ماتریس جرم برابر خواهد بود با:
+\[
+    \mathbf{M}^{-1} = \frac{1}{ml^2(M + m\sin^2\theta)}
+    \begin{bmatrix}
+        ml^2          & -ml\cos\theta \\
+        -ml\cos\theta & M+m
+    \end{bmatrix}
+\]
+با ضرب \lr{$\mathbf{M}^{-1}$} در سمت راست، شتاب‌ها به دست می‌آیند (\lr{$\ddot{\mathbf{q}} = \mathbf{M}^{-1}\mathbf{f}_{bias} + \mathbf{M}^{-1}\mathbf{B}_u\mathbf{u}$}). ماتریس توزیع ورودی غیرخطی برابر است با:
+\[
+    \mathbf{G}_u = \mathbf{M}^{-1}\mathbf{B}_u = \frac{1}{ml^2(M + m\sin^2\theta)}
+    \begin{bmatrix}
+        ml^2          & -ml\cos\theta \\
+        -ml\cos\theta & M+m
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 1 & -m\sin\theta \\
+        0 & 0 & 0
+    \end{bmatrix}
+\]
+با انجام ضرب ماتریسی:
+\[
+    \renewcommand{\arraystretch}{1.8}
+    \mathbf{G}_u =
+    \begin{bmatrix}
+        \dfrac{1}{M + m\sin^2\theta}              & \dfrac{1}{M + m\sin^2\theta}              & \dfrac{-m\sin\theta}{M + m\sin^2\theta}             \\
+        \dfrac{-\cos\theta}{l(M + m\sin^2\theta)} & \dfrac{-\cos\theta}{l(M + m\sin^2\theta)} & \dfrac{m\sin\theta\cos\theta}{l(M + m\sin^2\theta)}
+    \end{bmatrix}
+\]
+
+\subsection{نمایش فضای حالت آفین غیرخطی}
+بردار حالت ۶-بُعدی و بردار ورودی را به صورت زیر تعریف می‌کنیم:
+\[
+    \mathbf{x} = [x_1, x_2, x_3, x_4, x_5, x_6]^T = [x, \dot{x}, \theta, \dot{\theta}, l, \dot{l}]^T, \quad \mathbf{u} = [u_1, u_2, u_3]^T = [F_1, F_2, \ddot{l}]^T
+\]
+مدل حالت نهایی \lr{$\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}) + \mathbf{g}(\mathbf{x})\mathbf{u}$} به صورت زیر استخراج می‌گردد:
+
+\[
+    \renewcommand{\arraystretch}{2}
+    \mathbf{f}(\mathbf{x}) =
+    \begin{bmatrix}
+        x_2                                                                                            \\
+        \dfrac{x_5 \cdot \mathrm{RHS}_1 - \cos x_3 \cdot \mathrm{RHS}_2}{x_5(M + m\sin^2 x_3)}         \\
+        x_4                                                                                            \\
+        \dfrac{-m x_5 \cos x_3 \cdot \mathrm{RHS}_1 + (M+m) \mathrm{RHS}_2}{m x_5^2 (M + m\sin^2 x_3)} \\
+        x_6                                                                                            \\
+        0
+    \end{bmatrix}
+\]
+که در آن برای سادگی در پیاده‌سازی نرم‌افزاری:
+\[
+    \mathrm{RHS}_1 = m x_5 x_4^2\sin x_3 - 2m x_6 x_4\cos x_3 - b_c x_2
+\]
+\[
+    \mathrm{RHS}_2 = -2m x_5 x_6 x_4 - mg x_5\sin x_3 - b_p x_4
+\]
+و ماتریس کنترل غیرخطی \lr{$\mathbf{g}(\mathbf{x}) \in \mathbb{R}^{6 \times 3}$}:
+\[
+    \renewcommand{\arraystretch}{2.2}
+    \mathbf{g}(\mathbf{x}) =
+    \begin{bmatrix}
+        0                                               & 0                                               & 0                                                       \\
+        \dfrac{1}{\Gamma(\mathbf{x})}                   & \dfrac{1}{\Gamma(\mathbf{x})}                   & \dfrac{-m\sin x_3}{\Gamma(\mathbf{x})}                  \\
+        0                                               & 0                                               & 0                                                       \\
+        \dfrac{-\cos x_3}{x_5 \cdot \Gamma(\mathbf{x})} & \dfrac{-\cos x_3}{x_5 \cdot \Gamma(\mathbf{x})} & \dfrac{m\sin x_3\cos x_3}{x_5 \cdot \Gamma(\mathbf{x})} \\
+        0                                               & 0                                               & 0                                                       \\
+        0                                               & 0                                               & 1
+    \end{bmatrix}
+\]
+که مخرج مشترک برابر است با \lr{$\Gamma(\mathbf{x}) = M + m\sin^2 x_3$}.
+
