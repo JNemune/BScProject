@@ -435,125 +435,90 @@
 
 \section{مدل فضای حالت غیرخطی جهت طراحی کنترل‌کننده پیش‌بین \lr{(NMPC)}}
 
-به منظور پیاده‌سازی کنترل‌کننده پیش‌بین مدل غیرخطی \lr{(NMPC)}، نیازمند استخراج دقیق مدل دینامیکی به فرم آفینِ غیرخطی \lr{(Nonlinear Control-Affine)} هستیم:
+به منظور پیاده‌سازی کنترل‌کننده پیش‌بین مدل غیرخطی \lr{(NMPC)} و حفظ یکپارچگیِ تحلیلی با مدل معرفی‌شده در بخش (۳-۵-۲)، بردار حالت سیستم را به ۴ متغیر اصلیِ دینامیک (موقعیت و زوایا) محدود کرده و متغیرهای سینماتیکیِ طول کابل را به عنوان ورودی به سیستم اعمال می‌کنیم.
+در این ساختار، به دلیل حضور مستقیم متغیرهای ورودی در عبارات مثلثاتی و اینرسی، مدل دینامیکی از فرم آفین خارج شده و به فرم کلی غیرخطی \lr{(General Nonlinear System)} زیر توصیف می‌گردد:
 \[
-    \dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}) + \mathbf{g}(\mathbf{x})\mathbf{u}
+    \dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}, \mathbf{u})
 \]
-در این فرمولاسیون، طول کابل (\lr{$l$}) از حالت پارامتر خارج شده و مستقیماً به عنوان متغیر حالت و شتاب آن (\lr{$\ddot{l}$}) به عنوان ورودی کنترلی وارد سیستم می‌شود.
 
-\subsection{بازآرایی معادلات به فرم ماتریسی \lr{(Inertia Matrix)}}
-معادلات حرکت استخراج‌شده در بخش قبل را بازنویسی می‌کنیم. هدف، جداسازی شتاب‌های درجات آزادی (\lr{$\ddot{x}$} و \lr{$\ddot{\theta}$}) در یک سمت تساوی است:
+\subsection{بازآرایی معادلات و تعریف بردارهای حالت و ورودی}
+بردارهای حالت ۴-بُعدی و ورودی ۴-بُعدی (شامل نیروی تجمیع‌شده کالسکه \lr{$F$} و متغیرهای طول کابل) به صورت زیر تعریف می‌شوند:
 \[
-    (M+m)\ddot{x} + ml\cos\theta\ddot{\theta} = F_1 + F_2 - b_c\dot{x} - m\ddot{l}\sin\theta - 2m\dot{l}\dot{\theta}\cos\theta + ml\dot{\theta}^2\sin\theta
+    \mathbf{x} = [x_1, x_2, x_3, x_4]^T = [x, \dot{x}, \theta, \dot{\theta}]^T
 \]
 \[
-    ml\cos\theta\ddot{x} + ml^2\ddot{\theta} = -2ml\dot{l}\dot{\theta} - mgl\sin\theta - b_p\dot{\theta}
+    \mathbf{u} = [u_1, u_2, u_3, u_4]^T = [F, \ddot{l}, \dot{l}, l]^T
 \]
-با تعریف بردار مختصات تعمیم‌یافته \lr{$\mathbf{q} = [x, \theta]^T$}، معادلات را به فرم استاندارد \lr{$\mathbf{M}(\mathbf{q})\ddot{\mathbf{q}} = \mathbf{RHS}$} می‌نویسیم:
+با جایگذاری این متغیرها در معادلات اویلر-لاگرانژِ استخراج‌شده، معادلات حرکت را با هدف جداسازی شتاب‌های درجات آزادی (\lr{$\ddot{x}$} و \lr{$\ddot{\theta}$}) بازنویسی می‌کنیم:
+\[
+    (M+m)\ddot{x} + m u_4\cos x_3 \ddot{\theta} = u_1 - b_c x_2 - m u_2\sin x_3 - 2m u_3 x_4\cos x_3 + m u_4 x_4^2\sin x_3
+\]
+\[
+    m u_4\cos x_3 \ddot{x} + m u_4^2 \ddot{\theta} = -2m u_4 u_3 x_4 - mg u_4\sin x_3 - b_p x_4
+\]
+با تعریف بردار مختصات تعمیم‌یافته \lr{$\mathbf{q} = [x, \theta]^T$}، معادلات به فرم استاندارد \lr{$\mathbf{M}(\mathbf{x}, \mathbf{u})\ddot{\mathbf{q}} = \mathbf{RHS}(\mathbf{x}, \mathbf{u})$} درمی‌آیند:
 \[
     \begin{bmatrix}
-        M+m          & ml\cos\theta \\
-        ml\cos\theta & ml^2
+        M+m           & m u_4\cos x_3 \\
+        m u_4\cos x_3 & m u_4^2
     \end{bmatrix}
     \begin{bmatrix}
         \ddot{x} \\ \ddot{\theta}
     \end{bmatrix}
     =
     \begin{bmatrix}
-        - 2m\dot{l}\dot{\theta}\cos\theta + ml\dot{\theta}^2\sin\theta - b_c\dot{x} \\
-        -2ml\dot{l}\dot{\theta} - mgl\sin\theta - b_p\dot{\theta}
-    \end{bmatrix}
-    +
-    \begin{bmatrix}
-        1 & 1 & -m\sin\theta \\
-        0 & 0 & 0
-    \end{bmatrix}
-    \begin{bmatrix}
-        F_1 \\ F_2 \\ \ddot{l}
+        u_1 - b_c x_2 - m u_2\sin x_3 - 2m u_3 x_4\cos x_3 + m u_4 x_4^2\sin x_3 \\
+        -2m u_4 u_3 x_4 - mg u_4\sin x_3 - b_p x_4
     \end{bmatrix}
 \]
-که در آن ترم سمت راست به دو بخش نیروهای بایاس (\lr{$\mathbf{f}_{bias}$}) و ماتریس توزیع ورودی (\lr{$\mathbf{B}_u\mathbf{u}$}) تفکیک شده است.
 
 \subsection{معکوس‌گیری ماتریس جرم و استخراج شتاب‌ها}
-برای یافتن شتاب‌ها، ابتدا دترمینان ماتریس جرم \lr{$\mathbf{M}(\mathbf{q})$} را محاسبه می‌کنیم:
+برای یافتن شتاب‌ها، ابتدا دترمینان ماتریس جرم \lr{$\mathbf{M}$} را محاسبه می‌کنیم:
 \[
-    |\mathbf{M}| = (M+m)(ml^2) - (ml\cos\theta)^2 = Mml^2 + m^2l^2 - m^2l^2\cos^2\theta
+    |\mathbf{M}| = (M+m)(m u_4^2) - (m u_4\cos x_3)^2 = M m u_4^2 + m^2 u_4^2 - m^2 u_4^2\cos^2 x_3
 \]
-با استفاده از اتحاد \lr{$\sin^2\theta + \cos^2\theta = 1$}:
+با استفاده از اتحاد \lr{$\sin^2 x_3 + \cos^2 x_3 = 1$}:
 \[
-    |\mathbf{M}| = ml^2(M + m\sin^2\theta)
+    |\mathbf{M}| = m u_4^2(M + m\sin^2 x_3)
 \]
 معکوس ماتریس جرم برابر خواهد بود با:
 \[
-    \mathbf{M}^{-1} = \frac{1}{ml^2(M + m\sin^2\theta)}
+    \mathbf{M}^{-1} = \frac{1}{m u_4^2(M + m\sin^2 x_3)}
     \begin{bmatrix}
-        ml^2          & -ml\cos\theta \\
-        -ml\cos\theta & M+m
+        m u_4^2        & -m u_4\cos x_3 \\
+        -m u_4\cos x_3 & M+m
     \end{bmatrix}
 \]
-با ضرب \lr{$\mathbf{M}^{-1}$} در سمت راست، شتاب‌ها به دست می‌آیند (\lr{$\ddot{\mathbf{q}} = \mathbf{M}^{-1}\mathbf{f}_{bias} + \mathbf{M}^{-1}\mathbf{B}_u\mathbf{u}$}). ماتریس توزیع ورودی غیرخطی برابر است با:
+با ضرب \lr{$\mathbf{M}^{-1}$} در بردار \lr{$\mathbf{RHS}$}، شتاب‌های سیستم (\lr{$\ddot{\mathbf{q}}$}) به صورت تحلیلی به دست می‌آیند.
+
+\subsection{نمایش فضای حالت غیرخطی نهایی}
+برای سادگی در پیاده‌سازی نرم‌افزاریِ توابع در محیط \lr{MATLAB}، عبارات سمت راست معادلات نیرو را به صورت متغیرهای کمکی زیر تعریف می‌کنیم:
 \[
-    \mathbf{G}_u = \mathbf{M}^{-1}\mathbf{B}_u = \frac{1}{ml^2(M + m\sin^2\theta)}
-    \begin{bmatrix}
-        ml^2          & -ml\cos\theta \\
-        -ml\cos\theta & M+m
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 1 & -m\sin\theta \\
-        0 & 0 & 0
-    \end{bmatrix}
+    \mathrm{RHS}_1 = u_1 - b_c x_2 - m u_2\sin x_3 - 2m u_3 x_4\cos x_3 + m u_4 x_4^2\sin x_3
 \]
-با انجام ضرب ماتریسی:
 \[
-    \renewcommand{\arraystretch}{1.8}
-    \mathbf{G}_u =
-    \begin{bmatrix}
-        \dfrac{1}{M + m\sin^2\theta}              & \dfrac{1}{M + m\sin^2\theta}              & \dfrac{-m\sin\theta}{M + m\sin^2\theta}             \\
-        \dfrac{-\cos\theta}{l(M + m\sin^2\theta)} & \dfrac{-\cos\theta}{l(M + m\sin^2\theta)} & \dfrac{m\sin\theta\cos\theta}{l(M + m\sin^2\theta)}
-    \end{bmatrix}
+    \mathrm{RHS}_2 = -2m u_4 u_3 x_4 - mg u_4\sin x_3 - b_p x_4
 \]
 
-\subsection{نمایش فضای حالت آفین غیرخطی}
-بردار حالت ۶-بُعدی و بردار ورودی را به صورت زیر تعریف می‌کنیم:
-\[
-    \mathbf{x} = [x_1, x_2, x_3, x_4, x_5, x_6]^T = [x, \dot{x}, \theta, \dot{\theta}, l, \dot{l}]^T, \quad \mathbf{u} = [u_1, u_2, u_3]^T = [F_1, F_2, \ddot{l}]^T
-\]
-مدل حالت نهایی \lr{$\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}) + \mathbf{g}(\mathbf{x})\mathbf{u}$} به صورت زیر استخراج می‌گردد:
-
-\[
-    \renewcommand{\arraystretch}{2}
-    \mathbf{f}(\mathbf{x}) =
-    \begin{bmatrix}
-        x_2                                                                                            \\
-        \dfrac{x_5 \cdot \mathrm{RHS}_1 - \cos x_3 \cdot \mathrm{RHS}_2}{x_5(M + m\sin^2 x_3)}         \\
-        x_4                                                                                            \\
-        \dfrac{-m x_5 \cos x_3 \cdot \mathrm{RHS}_1 + (M+m) \mathrm{RHS}_2}{m x_5^2 (M + m\sin^2 x_3)} \\
-        x_6                                                                                            \\
-        0
-    \end{bmatrix}
-\]
-که در آن برای سادگی در پیاده‌سازی نرم‌افزاری:
-\[
-    \mathrm{RHS}_1 = m x_5 x_4^2\sin x_3 - 2m x_6 x_4\cos x_3 - b_c x_2
-\]
-\[
-    \mathrm{RHS}_2 = -2m x_5 x_6 x_4 - mg x_5\sin x_3 - b_p x_4
-\]
-و ماتریس کنترل غیرخطی \lr{$\mathbf{g}(\mathbf{x}) \in \mathbb{R}^{6 \times 3}$}:
+در نهایت، مدل دینامیکی سیستم به فرم فضای حالت کلی \lr{$\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}, \mathbf{u})$} به صورت زیر استخراج می‌گردد:
 \[
     \renewcommand{\arraystretch}{2.2}
-    \mathbf{g}(\mathbf{x}) =
+    \dot{\mathbf{x}} =
     \begin{bmatrix}
-        0                                               & 0                                               & 0                                                       \\
-        \dfrac{1}{\Gamma(\mathbf{x})}                   & \dfrac{1}{\Gamma(\mathbf{x})}                   & \dfrac{-m\sin x_3}{\Gamma(\mathbf{x})}                  \\
-        0                                               & 0                                               & 0                                                       \\
-        \dfrac{-\cos x_3}{x_5 \cdot \Gamma(\mathbf{x})} & \dfrac{-\cos x_3}{x_5 \cdot \Gamma(\mathbf{x})} & \dfrac{m\sin x_3\cos x_3}{x_5 \cdot \Gamma(\mathbf{x})} \\
-        0                                               & 0                                               & 0                                                       \\
-        0                                               & 0                                               & 1
+        \dot{x}_1 \\
+        \dot{x}_2 \\
+        \dot{x}_3 \\
+        \dot{x}_4
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        x_2                                                                                    \\
+        \dfrac{u_4 \cdot \mathrm{RHS}_1 - \cos x_3 \cdot \mathrm{RHS}_2}{u_4(M + m\sin^2 x_3)} \\
+        x_4                                                                                    \\
+        \dfrac{-m u_4 \cos x_3 \cdot \mathrm{RHS}_1 + (M+m) \mathrm{RHS}_2}{m u_4^2 (M + m\sin^2 x_3)}
     \end{bmatrix}
 \]
-که مخرج مشترک برابر است با \lr{$\Gamma(\mathbf{x}) = M + m\sin^2 x_3$}.
-
+این معادلات دقیقاً فیزیک کوپل‌شده‌ی سیستم را توصیف کرده و به عنوان تابع پیش‌بین در الگوریتم بهینه‌سازیِ \lr{NMPC} مورد استفاده قرار می‌گیرند.
 \section{پیاده‌سازی مدل فیزیکی در محیط \lr{Simscape Multibody}}
 
 به منظور اعتبارسنجی معادلات استخراج‌شده و ایجاد یک بستر (\lr{Plant}) دقیق جهت اعمال الگوریتم‌های کنترلی، سیستم آونگ با طول متغیر در محیط \lr{Simscape Multibody} شبیه‌سازی گردید. در این مدل‌سازی، چالش‌های سینماتیکی مرتبط با درجات آزادی متغیر با زمان (\lr{Reel Rate}) از طریق یک معماری ساختاریافته برطرف شدند.
