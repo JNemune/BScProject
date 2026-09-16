@@ -1,23 +1,35 @@
 % !TEX TS-program = xelatex
+% Root document
 
 \documentclass[14pt,a4paper]{extreport}
 
+% Settings and packages
 \input{commands}
 
 \begin{document}
 
+% Frontmatter
 \include{front_back/cover_fa}
 \input{front_back/frontmatter}
 
+% Switch to standard arabic numbering for main content
+\cleardoublepage
+\pagenumbering{arabic}
+
+% Main chapters
 \include{chapters/chapter1/chapter1}
 \include{chapters/chapter2/chapter2}
 \include{chapters/chapter3/chapter3}
 
+% Bibliography
 \renewcommand{\bibname}{مراجع}
 \bibliographystyle{plain-fa}
 \bibliography{references}
 
+% Appendices
 \include{front_back/appendix}
+
+% English back cover
 \include{front_back/cover_en}
 
 \end{document}
