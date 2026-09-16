@@ -1,0 +1,113 @@
+% chapters/chapter2/2_2_lagrange.tex
+% !TeX root=../../main.tex
+
+\section{معرفی سیستم}
+
+در این سیستم بسط‌یافته، یک آونگ ساده به ارابه‌ای متصل است که روی یک ریل افقی حرکت می‌کند. طول کابل آونگ متغیر است و به عنوان یک متغیر سینماتیکی (ورودی) با نماد $l(t)$ در نظر گرفته می‌شود. همچنین، نیروی محرک $F$ سیستم را در امتداد ریل تحریک می‌کند (جهت مثبت این نیرو، هم‌سو با جهت مثبت محور $x$ فرض شده است).
+
+مختصات تعمیم‌یافته سیستم با توجه به دو درجه آزادی آن، به صورت زیر انتخاب می‌شوند:
+\[
+    q = \begin{bmatrix} x \\ \theta \end{bmatrix}
+\]
+متغیرها و پارامترهای سیستم عبارت‌اند از:
+\begin{itemize}
+    \item $x$: موقعیت افقی ارابه نسبت به تکیه‌گاه اول
+    \item $\theta$: زاویه آونگ نسبت به راستای قائم (جهت پادساعت‌گرد، مثبت فرض شده است)
+    \item $l(t)$: طول متغیر کابل آونگ (ورودی سینماتیکی)
+    \item $M$: جرم ارابه
+    \item $m$: جرم نقطه‌ای آونگ
+    \item $M_b$: جرم ریل با طول کل $D$
+    \item $g$: شتاب گرانش
+    \item $b_c$: ضریب اصطکاک لزج میان ارابه و ریل
+    \item $b_p$: ضریب اصطکاک لزج در مفصل آونگ
+\end{itemize}
+
+خروجی‌های مطلوب این سیستم شامل موقعیت‌ها و نیروهای عکس‌العمل تکیه‌گاهی ریل ($R_{x1}$ و $R_{y1}$ در تکیه‌گاه اول و $R_{y2}$ در تکیه‌گاه دوم) است.
+
+\section{استخراج معادلات حرکت به روش لاگرانژ}
+
+\subsection{سینماتیک و مختصات جرم آونگ}
+
+با در نظر گرفتن دستگاه مختصات دکارتی استاندارد (محور $x$ به سمت راست و محور $y$ به سمت بالا)، مختصات جرم آونگ به صورت زیر بیان می‌شود:
+\begin{align*}
+    x_p & = x + l(t) \sin\theta \\
+    y_p & = -l(t) \cos\theta
+\end{align*}
+با مشتق‌گیری زمانی از روابط فوق (با فرض $\dot{l} \neq 0$)، مؤلفه‌های سرعت محاسبه می‌شوند:
+\begin{align*}
+    \dot{x}_p & = \dot{x} + \dot{l}\sin\theta + l\dot{\theta}\cos\theta \\
+    \dot{y}_p & = -\dot{l}\cos\theta + l\dot{\theta}\sin\theta
+\end{align*}
+مجذور سرعت خطی جرم آونگ ($v_p^2 = \dot{x}_p^2 + \dot{y}_p^2$) پس از بسط و ساده‌سازی عبارات، به شکل زیر به دست می‌آید:
+\[
+    v_p^2 = \dot{x}^2 + \dot{l}^2 + l^2\dot{\theta}^2 + 2\dot{x}\dot{l}\sin\theta + 2\dot{x}l\dot{\theta}\cos\theta
+\]
+
+\subsection{انرژی جنبشی و پتانسیل}
+
+انرژی جنبشی کل سیستم برابر با مجموع انرژی جنبشی ارابه و آونگ است:
+\begin{align*}
+    T & = \frac{1}{2}M\dot{x}^2 + \frac{1}{2}m v_p^2                                                                                                          \\
+    T & = \frac{1}{2}(M+m)\dot{x}^2 + \frac{1}{2}m \left( \dot{l}^2 + l^2\dot{\theta}^2 \right) + m\dot{x}\dot{l}\sin\theta + ml\dot{x}\dot{\theta}\cos\theta
+\end{align*}
+با فرض قرارگیری مبدأ انرژی پتانسیل در راستای حرکت ارابه، انرژی پتانسیل سیستم برابر است با:
+\[
+    V = -mgl\cos\theta
+\]
+
+\subsection{تابع لاگرانژ}
+
+با استفاده از رابطه $\mathcal{L} = T - V$، تابع لاگرانژ سیستم به این شکل تشکیل می‌شود:
+\[
+    \mathcal{L} = \frac{1}{2}(M+m)\dot{x}^2 + \frac{1}{2}m(\dot{l}^2 + l^2\dot{\theta}^2) + m\dot{x}\dot{l}\sin\theta + ml\dot{x}\dot{\theta}\cos\theta + mgl\cos\theta
+\]
+
+\subsection{نیروهای تعمیم‌یافته غیرمحافظه‌کار}
+نیروهای تعمیم‌یافته متناظر با هر درجه آزادی به صورت زیر تعریف می‌شوند:
+\begin{align*}
+    Q_x      & = F - b_c\dot{x}   \\
+    Q_\theta & = -b_p\dot{\theta}
+\end{align*}
+
+\subsection{اعمال معادلات اویلر-لاگرانژ}
+
+\subsubsection{معادله حرکت ارابه (مختصه $x$)}
+\[
+    \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{x}}\right) - \frac{\partial \mathcal{L}}{\partial x} = Q_x
+\]
+با محاسبه مشتقات جزئی، جایگذاری آن‌ها در رابطه پیشین و مرتب‌سازی عبارات، معادله حرکت ارابه به دست می‌آید:
+\[
+    (M+m)\ddot{x} + ml\ddot{\theta}\cos\theta + m\ddot{l}\sin\theta + 2m\dot{l}\dot{\theta}\cos\theta - ml\dot{\theta}^2\sin\theta + b_c\dot{x} = F
+\]
+
+\subsubsection{معادله حرکت آونگ (مختصه $\theta$)}
+\[
+    \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{\theta}}\right) - \frac{\partial \mathcal{L}}{\partial \theta} = Q_\theta
+\]
+پس از محاسبه مشتقات و ساده‌سازی عبارات، معادله دوم حاصل می‌شود:
+\[
+    ml^2\ddot{\theta} + ml\ddot{x}\cos\theta + 2ml\dot{l}\dot{\theta} + mgl\sin\theta + b_p\dot{\theta} = 0
+\]
+
+\section{نیروهای تکیه‌گاهی ریل}
+
+برای استخراج نیروهای تکیه‌گاهی $R_{x1}, R_{y1}, R_{y2}$، تعادل شبه‌استاتیکی کل مجموعه بررسی می‌شود:
+
+\subsection{تعادل افقی}
+نیروی خارجی مهارکننده ریل در راستای افق:
+\[
+    \sum F_x = 0 \implies R_{x1} - F + b_c\dot{x} = 0 \implies R_{x1} = F - b_c\dot{x}
+\]
+
+\subsection{تعادل قائم و گشتاور}
+با فرض وزن ریل یکنواخت ($M_b g$) و نیروی عمودی ارابه $N = (M+m)g$ و همچنین $D$ طول ریل، از تعادل گشتاور حول تکیه‌گاه اول:
+\[
+    \sum M_1 = 0 \implies R_{y2} \cdot D - M_b g \frac{D}{2} - (M+m)g \cdot x = 0
+\]
+\[
+    R_{y2} = \frac{M_b g}{2} + \frac{(M+m)g}{D} x
+\]
+تعادل نیروهای قائم:
+\[
+    \sum F_y = 0 \implies R_{y1} = \frac{M_b g}{2} + \frac{(M+m)g}{D} (D-x)
+\]
