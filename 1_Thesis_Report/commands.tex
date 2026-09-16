@@ -1,0 +1,76 @@
+% Essential packages
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{titlesec}
+\usepackage{tocloft}
+
+% Acronyms (esclocations=true resolves glossaries warning)
+\usepackage[xindy,toc,acronym,nonumberlist=true,esclocations=true]{glossaries}
+\makeglossaries
+\newcommand{\printacronyms}{
+    \renewcommand{\acronymname}{فهرست علائم اختصاری}
+    \printglossary[type=\acronymtype]
+}
+
+% Page geometry
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.54cm, right=2.54cm, headsep=0.7cm, footskip=0.7cm]{geometry}
+
+% Image paths
+\graphicspath{{images/logo/}{images/0_System_Modeling/}{images/1_LQR_Step/}{images/2_LQR_Trajectory/}{images/3_NMPC_Basic/}{images/4_NMPC_Trajectory/}{images/Misc/}}
+
+% Spacing
+\setstretch{1.2}
+
+% Captions (Configured globally before xepersian to prevent unused setup warning)
+\captionsetup{
+    font={small,bf},
+    labelfont=bf,
+    labelsep=space,
+    justification=centering,
+    skip=6pt
+}
+\captionsetup[table]{position=top}
+\captionsetup[figure]{position=bottom}
+
+% Headings
+\titlespacing*{\chapter}{0pt}{18pt}{12pt}
+\titlespacing*{\section}{0pt}{12pt}{3pt}
+\titlespacing*{\subsection}{0pt}{12pt}{3pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{3pt}
+
+% TOC spacing
+\setlength{\cftbeforechapskip}{8pt}
+\setlength{\cftbeforesecskip}{4pt}
+
+% ---------------------------------------------------------
+% XePersian (Must be the last package)
+% ---------------------------------------------------------
+\usepackage[extrafootnotefeatures, localize=on, displaymathdigits=persian]{xepersian}
+
+% Fonts Configuration (Path isolation to local font directory)
+\settextfont[Path={./font/}, BoldFont={IRLotusICEE_Bold.ttf}, BoldItalicFont={IRLotusICEE_BoldIranic.ttf}, ItalicFont={IRLotusICEE_Iranic.ttf}, Scale=1.2]{IRLotusICEE.ttf}
+
+\setlatintextfont[Path={./font/}, BoldFont={LiberationSerif-Bold.ttf}, BoldItalicFont={LiberationSerif-BoldItalic.ttf}, ItalicFont={LiberationSerif-Italic.ttf}, Scale=1.0]{LiberationSerif-Regular.ttf}
+
+\setdigitfont[Path={./font/}, Scale=1.2]{IRLotusICEE.ttf}
+
+% Title font (AutoFakeBold eliminates the missing bold shape warning)
+\defpersianfont\titrfont[Path={./font/}, AutoFakeBold, Scale=1.0]{IRTitr.ttf}
+
+% TOC fonts
+\renewcommand{\cfttoctitlefont}{\titrfont\fontsize{18}{24}\selectfont\textbf}
+\renewcommand{\cftloftitlefont}{\titrfont\fontsize{18}{24}\selectfont\textbf}
+\renewcommand{\cftlottitlefont}{\titrfont\fontsize{18}{24}\selectfont\textbf}
+
+% Numbering
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\thechapter-\arabic{section}}
+\renewcommand{\thesubsection}{\thesection-\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection-\arabic{subsubsection}}
+\renewcommand{\theparagraph}{\thesubsubsection-\arabic{paragraph}}
+\renewcommand{\thesubparagraph}{\theparagraph-\arabic{subparagraph}}
