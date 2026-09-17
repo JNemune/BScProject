@@ -1,25 +1,26 @@
 % chapters/chapter2/2_2_lagrange.tex
 % !TeX root=../../main.tex
 
+% System Intro
 \section{معرفی سیستم}
 
 در این سیستم بسط‌یافته، یک آونگ ساده به ارابه‌ای متصل است که روی یک ریل افقی حرکت می‌کند. طول کابل آونگ متغیر است و به عنوان یک متغیر سینماتیکی (ورودی) با نماد $l(t)$ در نظر گرفته می‌شود. همچنین، نیروی محرک $F$ سیستم را در امتداد ریل تحریک می‌کند (جهت مثبت این نیرو، هم‌سو با جهت مثبت محور $x$ فرض شده است). شماتیک سینماتیکی و پارامترهای مدل‌سازی سیستم در شکل \ref{fig:modeling_schematic} نشان داده شده است.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{Modeling.pdf}
+    \includegraphics[width=0.9\textwidth]{images/0_System_Modeling/Modeling.pdf}
     \caption{شماتیک سینماتیکی جرثقیل سقفی با طول کابل متغیر و درجات آزادی سیستم.}
     \label{fig:modeling_schematic}
 \end{figure}
 
-مختصات تعمیم‌یافته سیستم با توجه به دو درجه آزادی آن، به صورت زیر انتخاب می‌شوند:
+مختصات تعمیم‌یافتهٔ سیستم با توجه به دو درجهٔ آزادی آن، به صورت زیر انتخاب می‌شوند:
 \[
     q = \begin{bmatrix} x \\ \theta \end{bmatrix}
 \]
 متغیرها و پارامترهای سیستم عبارت‌اند از:
 \begin{itemize}
     \item $x$: موقعیت افقی ارابه نسبت به مبدأ مختصات
-    \item $\theta$: زاویه آونگ نسبت به راستای قائم (جهت پادساعت‌گرد، مثبت فرض شده است)
+    \item $\theta$: زاویهٔ آونگ نسبت به راستای قائم (جهت پادساعت‌گرد، مثبت فرض شده است)
     \item $l(t)$: طول متغیر کابل آونگ (ورودی سینماتیکی)
     \item $M$: جرم ارابه
     \item $m$: جرم نقطه‌ای آونگ
@@ -28,67 +29,84 @@
     \item $b_p$: ضریب اصطکاک لزج در مفصل آونگ
 \end{itemize}
 
+% Lagrange Derivation
 \section{استخراج معادلات حرکت به روش لاگرانژ}
+
+جهت اعتبارسنجی و تأیید صحت معادلات تحلیلی استخراج‌شده در این بخش، محاسبات نمادین (\lr{Symbolic}) نیز در نرم‌افزار \lr{MATLAB} توسعه یافته است. کدهای مربوط به این محاسبات جهت تکرارپذیری، در کد \ref{code:lagrange} از پیوست \ref{app:matlab_codes} ارائه شده‌اند.
 
 \subsection{سینماتیک و مختصات جرم آونگ}
 
 با در نظر گرفتن دستگاه مختصات دکارتی استاندارد (محور $x$ به سمت راست و محور $y$ به سمت بالا)، مختصات جرم آونگ به صورت زیر بیان می‌شود:
-\begin{align*}
+\begin{align}
     x_p & = x + l(t) \sin\theta \\
     y_p & = -l(t) \cos\theta
-\end{align*}
+\end{align}
 با مشتق‌گیری زمانی از روابط فوق (با فرض $\dot{l} \neq 0$)، مؤلفه‌های سرعت محاسبه می‌شوند:
-\begin{align*}
+\begin{align}
     \dot{x}_p & = \dot{x} + \dot{l}\sin\theta + l\dot{\theta}\cos\theta \\
     \dot{y}_p & = -\dot{l}\cos\theta + l\dot{\theta}\sin\theta
-\end{align*}
-مجذور سرعت خطی جرم آونگ ($v_p^2 = \dot{x}_p^2 + \dot{y}_p^2$) پس از بسط و ساده‌سازی عبارات، به شکل زیر به دست می‌آید:
-\[
+\end{align}
+مجذور سرعت خطی جرم آونگ ($v_p^2 = \dot{x}_p^2 + \dot{y}_p^2$) پس از بسط، جایگذاری اتحاد مثلثاتی ($\sin^2\theta + \cos^2\theta = 1$) و ساده‌سازی عبارات، به شکل زیر به دست می‌آید:
+\begin{equation}
     v_p^2 = \dot{x}^2 + \dot{l}^2 + l^2\dot{\theta}^2 + 2\dot{x}\dot{l}\sin\theta + 2\dot{x}l\dot{\theta}\cos\theta
-\]
+\end{equation}
 
 \subsection{انرژی جنبشی و پتانسیل}
 
-انرژی جنبشی کل سیستم برابر با مجموع انرژی جنبشی ارابه و آونگ است:
-\begin{align*}
-    T & = \frac{1}{2}M\dot{x}^2 + \frac{1}{2}m v_p^2                                                                                                          \\
-    T & = \frac{1}{2}(M+m)\dot{x}^2 + \frac{1}{2}m \left( \dot{l}^2 + l^2\dot{\theta}^2 \right) + m\dot{x}\dot{l}\sin\theta + ml\dot{x}\dot{\theta}\cos\theta
-\end{align*}
-با فرض قرارگیری مبدأ انرژی پتانسیل در راستای حرکت ارابه، انرژی پتانسیل سیستم برابر است با:
-\[
+انرژی جنبشی کل سیستم برابر با مجموع انرژی جنبشی ارابه و آونگ است ($T = \frac{1}{2}M\dot{x}^2 + \frac{1}{2}m v_p^2$). با جایگذاری مجذور سرعت آونگ در این رابطه داریم:
+\begin{equation}
+    T = \frac{1}{2}(M+m)\dot{x}^2 + \frac{1}{2}m \left( \dot{l}^2 + l^2\dot{\theta}^2 \right) + m\dot{x}\dot{l}\sin\theta + ml\dot{x}\dot{\theta}\cos\theta
+\end{equation}
+با فرض قرارگیری مبدأ انرژی پتانسیل در راستای حرکت ارابه، انرژی پتانسیل سیستم تنها ناشی از جرم آونگ بوده و برابر است با:
+\begin{equation}
     V = -mgl\cos\theta
-\]
+\end{equation}
 
-\subsection{تابع لاگرانژ}
+\subsection{تابع لاگرانژ و نیروهای تعمیم‌یافته}
 
-با استفاده از رابطه $\mathcal{L} = T - V$، تابع لاگرانژ سیستم به این شکل تشکیل می‌شود:
-\[
+با استفاده از رابطهٔ $\mathcal{L} = T - V$، تابع لاگرانژ سیستم به این شکل تشکیل می‌شود:
+\begin{equation}
     \mathcal{L} = \frac{1}{2}(M+m)\dot{x}^2 + \frac{1}{2}m(\dot{l}^2 + l^2\dot{\theta}^2) + m\dot{x}\dot{l}\sin\theta + ml\dot{x}\dot{\theta}\cos\theta + mgl\cos\theta
-\]
-
-\subsection{نیروهای تعمیم‌یافته غیرمحافظه‌کار}
-نیروهای تعمیم‌یافته متناظر با هر درجه آزادی به صورت زیر تعریف می‌شوند:
-\begin{align*}
+\end{equation}
+نیروهای تعمیم‌یافتهٔ ناپایستار متناظر با هر درجهٔ آزادی نیز با در نظر گرفتن نیروی محرک ارابه و نیروهای اتلافی (اصطکاک لزج) به صورت زیر تعریف می‌شوند:
+\begin{align}
     Q_x      & = F - b_c\dot{x}   \\
     Q_\theta & = -b_p\dot{\theta}
-\end{align*}
+\end{align}
 
 \subsection{اعمال معادلات اویلر-لاگرانژ}
 
-\subsubsection{معادله حرکت ارابه (مختصه $x$)}
-\[
-    \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{x}}\right) - \frac{\partial \mathcal{L}}{\partial x} = Q_x
-\]
-با محاسبه مشتقات جزئی، جایگذاری آن‌ها در رابطه پیشین و مرتب‌سازی عبارات، معادله حرکت ارابه به دست می‌آید:
-\[
+\subsubsection{معادلهٔ حرکت ارابه (مختصهٔ $x$)}
+معادلهٔ اویلر-لاگرانژ برای درجهٔ آزادی ارابه به فرم $\frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{x}}\right) - \frac{\partial \mathcal{L}}{\partial x} = Q_x$ تعریف می‌شود. ابتدا مشتق جزئی لاگرانژین نسبت به سرعت ارابه محاسبه می‌شود:
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial \dot{x}} = (M+m)\dot{x} + m\dot{l}\sin\theta + ml\dot{\theta}\cos\theta
+\end{equation}
+با مشتق‌گیری زمانی از این عبارت، به دلیل وابستگی متغیرهای طول کابل و زاویهٔ آونگ به زمان، قاعدهٔ ضرب مشتق اعمال می‌شود:
+\begin{equation}
+    \begin{split}
+        \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{x}}\right) ={} & (M+m)\ddot{x} + m\ddot{l}\sin\theta + m\dot{l}\dot{\theta}\cos\theta \\
+        & + m\dot{l}\dot{\theta}\cos\theta + ml\ddot{\theta}\cos\theta - ml\dot{\theta}^2\sin\theta
+    \end{split}
+\end{equation}
+از سوی دیگر، با توجه به عدم حضور مستقیم متغیر $x$ در تابع لاگرانژ، مشتق جزئی آن صفر است ($\frac{\partial \mathcal{L}}{\partial x} = 0$). با جایگذاری این عبارات در معادلهٔ اصلی و مرتب‌سازی، معادلهٔ حرکت ارابه به دست می‌آید:
+\begin{equation}
     (M+m)\ddot{x} + ml\ddot{\theta}\cos\theta + m\ddot{l}\sin\theta + 2m\dot{l}\dot{\theta}\cos\theta - ml\dot{\theta}^2\sin\theta + b_c\dot{x} = F
-\]
+\end{equation}
 
-\subsubsection{معادله حرکت آونگ (مختصه $\theta$)}
-\[
-    \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{\theta}}\right) - \frac{\partial \mathcal{L}}{\partial \theta} = Q_\theta
-\]
-پس از محاسبه مشتقات و ساده‌سازی عبارات، معادله دوم حاصل می‌شود:
-\[
+\subsubsection{معادلهٔ حرکت آونگ (مختصهٔ $\theta$)}
+برای درجهٔ آزادی آونگ، معادلهٔ $\frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{\theta}}\right) - \frac{\partial \mathcal{L}}{\partial \theta} = Q_\theta$ اعمال می‌شود. مشتق جزئی نسبت به سرعت زاویه‌ای برابر است با:
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial \dot{\theta}} = ml^2\dot{\theta} + ml\dot{x}\cos\theta
+\end{equation}
+مشتق زمانی عبارت فوق به فرم زیر بسط می‌یابد:
+\begin{equation}
+    \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{\theta}}\right) = 2ml\dot{l}\dot{\theta} + ml^2\ddot{\theta} + m\ddot{x}l\cos\theta + m\dot{x}\dot{l}\cos\theta - m\dot{x}l\dot{\theta}\sin\theta
+\end{equation}
+سپس مشتق جزئی لاگرانژین نسبت به متغیر زاویه محاسبه می‌شود:
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial \theta} = m\dot{x}\dot{l}\cos\theta - ml\dot{x}\dot{\theta}\sin\theta - mgl\sin\theta
+\end{equation}
+با تفریق رابطهٔ اخیر از مشتق زمانی و برابر قرار دادن آن با نیروی تعمیم‌یافته ($Q_\theta$)، مشاهده می‌شود که عبارات شامل شتاب کوریولیس متقابل ($m\dot{x}\dot{l}\cos\theta - m\dot{x}l\dot{\theta}\sin\theta$) به صورت کامل ساده شده و حذف می‌شوند. در نهایت معادلهٔ دوم حرکت به فرم فشردهٔ زیر استخراج می‌شود:
+\begin{equation}
     ml^2\ddot{\theta} + ml\ddot{x}\cos\theta + 2ml\dot{l}\dot{\theta} + mgl\sin\theta + b_p\dot{\theta} = 0
-\]
+\end{equation}

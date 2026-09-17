@@ -1,3 +1,6 @@
+% commands.tex
+% !TeX root=./main.tex
+
 % Essential packages
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
@@ -8,6 +11,8 @@
 \usepackage{caption}
 \usepackage{titlesec}
 \usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{listings}
 
 % Acronyms (esclocations=true resolves glossaries warning)
 \usepackage[xindy,toc,acronym,nonumberlist=true,esclocations=true]{glossaries}
@@ -26,7 +31,7 @@
 % Spacing
 \setstretch{1.2}
 
-% Captions (Configured globally before xepersian to prevent unused setup warning)
+% Captions (Configured globally before xepersian)
 \captionsetup{
     font={small,bf},
     labelfont=bf,
@@ -52,14 +57,10 @@
 % ---------------------------------------------------------
 \usepackage[extrafootnotefeatures, localize=on, displaymathdigits=persian]{xepersian}
 
-% Fonts Configuration (Path isolation to local font directory)
+% Fonts Configuration
 \settextfont[Path={./font/}, BoldFont={IRLotusICEE_Bold.ttf}, BoldItalicFont={IRLotusICEE_BoldIranic.ttf}, ItalicFont={IRLotusICEE_Iranic.ttf}, Scale=1.2]{IRLotusICEE.ttf}
-
 \setlatintextfont[Path={./font/}, BoldFont={LiberationSerif-Bold.ttf}, BoldItalicFont={LiberationSerif-BoldItalic.ttf}, ItalicFont={LiberationSerif-Italic.ttf}, Scale=1.0]{LiberationSerif-Regular.ttf}
-
 \setdigitfont[Path={./font/}, Scale=1.2]{IRLotusICEE.ttf}
-
-% Title font (AutoFakeBold eliminates the missing bold shape warning)
 \defpersianfont\titrfont[Path={./font/}, AutoFakeBold, Scale=1.0]{IRTitr.ttf}
 
 % TOC fonts
@@ -74,3 +75,21 @@
 \renewcommand{\thesubsubsection}{\thesubsection-\arabic{subsubsection}}
 \renewcommand{\theparagraph}{\thesubsubsection-\arabic{paragraph}}
 \renewcommand{\thesubparagraph}{\theparagraph-\arabic{subparagraph}}
+
+% Listings configuration (Must be configured AFTER xepersian to recognize captiondirection)
+\renewcommand{\lstlistingname}{\rl{کد}}
+\renewcommand{\lstlistlistingname}{\rl{فهرست کدها}}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true,
+    showstringspaces=false,
+    captionpos=b,
+    captiondirection=RTL
+}
