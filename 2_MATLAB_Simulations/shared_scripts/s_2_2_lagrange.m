@@ -1,4 +1,4 @@
-%% Lagrange Method Verification
+% Lagrange Method Verification
 clear; clc; close all;
 
 % Define symbolic variables
@@ -53,18 +53,14 @@ eq_theta = simplify(expand(eq_theta));
 disp('--- Equation of Motion for Pendulum (theta) ---');
 disp(eq_theta);
 
-% --- Square of Pendulum Velocity (vp^2) ---
-% diff(l(t), t)^2 + diff(x(t), t)^2 + l(t)^2*diff(theta(t), t)^2 + 2*sin(theta(t))*diff(l(t), t)*diff(x(t), t) + 2*cos(theta(t))*l(t)*diff(theta(t), t)*diff(x(t), t)
-% symbolic function inputs: t
+% --- Square of Pendulum Velocity (vp ^ 2) ---
+% diff(l(t), t) ^ 2 + diff(x(t), t) ^ 2 + l(t) ^ 2 * diff(theta(t), t) ^ 2 + 2 * sin(theta(t)) * diff(l(t), t) * diff(x(t), t) + 2 * cos(theta(t)) * l(t) * diff(theta(t), t) * diff(x(t), t)
 
 % --- Total Kinetic Energy (T) ---
-% (M*diff(x(t), t)^2)/2 + (m*diff(l(t), t)^2)/2 + (m*diff(x(t), t)^2)/2 + (m*l(t)^2*diff(theta(t), t)^2)/2 + m*sin(theta(t))*diff(l(t), t)*diff(x(t), t) + m*cos(theta(t))*l(t)*diff(theta(t), t)*diff(x(t), t)
-% symbolic function inputs: t
+% (M * diff(x(t), t) ^ 2) / 2 + (m * diff(l(t), t) ^ 2) / 2 + (m * diff(x(t), t) ^ 2) / 2 + (m * l(t) ^ 2 * diff(theta(t), t) ^ 2) / 2 + m * sin(theta(t)) * diff(l(t), t) * diff(x(t), t) + m * cos(theta(t)) * l(t) * diff(theta(t), t) * diff(x(t), t)
 
 % --- Equation of Motion for Cart (x) ---
-% m*sin(theta(t))*l(t)*diff(theta(t), t)^2 + F == m*diff(x(t), t, t) + bc*diff(x(t), t) + M*diff(x(t), t, t) + m*sin(theta(t))*diff(l(t), t, t) + m*cos(theta(t))*l(t)*diff(theta(t), t, t) + 2*m*cos(theta(t))*diff(l(t), t)*diff(theta(t), t)
-% symbolic function inputs: t
+% m * sin(theta(t)) * l(t) * diff(theta(t), t) ^ 2 + F == m * diff(x(t), t, t) + bc * diff(x(t), t) + M * diff(x(t), t, t) + m * sin(theta(t)) * diff(l(t), t, t) + m * cos(theta(t)) * l(t) * diff(theta(t), t, t) + 2 * m * cos(theta(t)) * diff(l(t), t) * diff(theta(t), t)
 
 % --- Equation of Motion for Pendulum (theta) ---
-% m*l(t)^2*diff(theta(t), t, t) + 2*m*l(t)*diff(l(t), t)*diff(theta(t), t) + m*cos(theta(t))*l(t)*diff(x(t), t, t) + g*m*sin(theta(t))*l(t) == -bp*diff(theta(t), t)
-% symbolic function inputs: t
+% m * l(t) ^ 2 * diff(theta(t), t, t) + 2 * m * l(t) * diff(l(t), t) * diff(theta(t), t) + m * cos(theta(t)) * l(t) * diff(x(t), t, t) + g * m * sin(theta(t)) * l(t) == -bp * diff(theta(t), t)
