@@ -84,8 +84,8 @@
 با مشتق‌گیری زمانی از این عبارت، به دلیل وابستگی متغیرهای طول کابل و زاویهٔ آونگ به زمان، قاعدهٔ ضرب مشتق اعمال می‌شود:
 \begin{equation}
     \begin{split}
-        \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{x}}\right) ={} & (M+m)\ddot{x} + m\ddot{l}\sin\theta + m\dot{l}\dot{\theta}\cos\theta \\
-        & + m\dot{l}\dot{\theta}\cos\theta + ml\ddot{\theta}\cos\theta - ml\dot{\theta}^2\sin\theta
+        \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{x}}\right) ={} & (M+m)\ddot{x} + m\ddot{l}\sin\theta + m\dot{l}\dot{\theta}\cos\theta                      \\
+                                                                                   & + m\dot{l}\dot{\theta}\cos\theta + ml\ddot{\theta}\cos\theta - ml\dot{\theta}^2\sin\theta
     \end{split}
 \end{equation}
 از سوی دیگر، با توجه به عدم حضور مستقیم متغیر $x$ در تابع لاگرانژ، مشتق جزئی آن صفر است ($\frac{\partial \mathcal{L}}{\partial x} = 0$). با جایگذاری این عبارات در معادلهٔ اصلی و مرتب‌سازی، معادلهٔ حرکت ارابه به دست می‌آید:
@@ -106,7 +106,10 @@
 \begin{equation}
     \frac{\partial \mathcal{L}}{\partial \theta} = m\dot{x}\dot{l}\cos\theta - ml\dot{x}\dot{\theta}\sin\theta - mgl\sin\theta
 \end{equation}
-با تفریق رابطهٔ اخیر از مشتق زمانی و برابر قرار دادن آن با نیروی تعمیم‌یافته ($Q_\theta$)، مشاهده می‌شود که عبارات شامل شتاب کوریولیس متقابل ($m\dot{x}\dot{l}\cos\theta - m\dot{x}l\dot{\theta}\sin\theta$) به صورت کامل ساده شده و حذف می‌شوند. در نهایت معادلهٔ دوم حرکت به فرم فشردهٔ زیر استخراج می‌شود:
+با تفریق رابطهٔ اخیر از مشتق زمانی و برابر قرار دادن آن با نیروی تعمیم‌یافته ($Q_\theta$)، مشاهده می‌شود که عباراتِ $m\dot{x}\dot{l}\cos\theta$ و $-m\dot{x}l\dot{\theta}\sin\theta$ به صورت کامل یکدیگر را خنثی کرده و حذف می‌شوند.
+
+ظهور اولیهٔ این عبارات در فرآیند مشتق‌گیری ریاضی، ناشی از کوپلینگ سینماتیکیِ سرعت ارابه ($\dot{x}$) با تغییرات طول کابل و سرعت زاویه‌ای آونگ در محاسبهٔ انرژی جنبشی است. با این حال، حذف نهایی آن‌ها در معادلهٔ حرکت، بازتابی تحلیلی از اصل نسبیت گالیله‌ای در فیزیک کلاسیک است؛ بدین معنا که حرکت ارابه با سرعت ثابت (به عنوان یک دستگاه مرجع لخت)، نباید هیچ‌گونه اثر دینامیکی یا گشتاور خالصی بر نوسان آونگ اعمال کند. بنابراین، تمامی اثرات ناشی از سرعت افقی ارابه ($\dot{x}$) به صورت ذاتی از دینامیک پاندول حذف شده و تنها شتاب ارابه ($\ddot{x}$) است که به صورت یک نیروی اینرسی در معادلهٔ نهایی باقی می‌ماند. در نهایت، معادلهٔ دوم حرکت به فرم فشردهٔ زیر استخراج می‌شود:
+
 \begin{equation}
     ml^2\ddot{\theta} + ml\ddot{x}\cos\theta + 2ml\dot{l}\dot{\theta} + mgl\sin\theta + b_p\dot{\theta} = 0
 \end{equation}
