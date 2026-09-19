@@ -23,15 +23,35 @@
 
 \begin{latin}
     \singlespacing
-    \lstinputlisting[language=MATLAB, caption={\rl{تابع برنامه‌ریز مسیر سینماتیکی و فیدفوروارد (\lr{TrajectoryGenerator\_LQR.m})}}, label={code:traj_generator}]{../2_MATLAB_Simulations/2_LQR_Trajectory/TrajectoryGenerator_LQR.m}
-\end{latin}
-
-\begin{latin}
-    \singlespacing
     \lstinputlisting[language=MATLAB, caption={\rl{پیکربندی پارامترها، قیود و افق‌های کنترل‌کننده \lr{NMPC} (\lr{InitFcn.m})}}, label={code:nmpc_init}]{../2_MATLAB_Simulations/3_NMPC_Basic/InitFcn.m}
 \end{latin}
 
 \begin{latin}
     \singlespacing
     \lstinputlisting[language=MATLAB, caption={\rl{مدل افزوده دیفرانسیل غیرخطی ۶ متغیره برای پیش‌بین \lr{NMPC} (\lr{CraneStateFcn.m})}}, label={code:nmpc_state}]{../2_MATLAB_Simulations/3_NMPC_Basic/CraneStateFcn.m}
+\end{latin}
+
+\begin{latin}
+    \singlespacing
+    \lstinputlisting[language=MATLAB, caption={\rl{پیکربندی پارامترها و طراحی کنترل‌کننده \lr{LQR} برای معماری ردیاب مسیر (\lr{InitFcn.m})}}, label={code:lqr_traj_init}]{../2_MATLAB_Simulations/2_LQR_Trajectory/InitFcn.m}
+\end{latin}
+
+\begin{latin}
+    \singlespacing
+    \lstinputlisting[language=MATLAB, caption={\rl{برنامه‌ریز مسیر سینماتیکی و تولید فیدفوروارد تحلیلی برای معماری \lr{LQR} (\lr{TrajectoryGenerator\_LQR.m})}}, label={code:traj_generator_lqr}]{../2_MATLAB_Simulations/2_LQR_Trajectory/TrajectoryGenerator_LQR.m}
+\end{latin}
+
+\begin{latin}
+    \singlespacing
+    \lstinputlisting[language=MATLAB, caption={\rl{پیکربندی پارامترها و افق‌های کنترل‌کننده \lr{NMPC} یکپارچه با برنامه‌ریز مسیر (\lr{InitFcn.m})}}, label={code:nmpc_traj_init}]{../2_MATLAB_Simulations/4_NMPC_Trajectory/InitFcn.m}
+\end{latin}
+
+\begin{latin}
+    \singlespacing
+    \lstinputlisting[language=MATLAB, caption={\rl{مدل افزوده دیفرانسیل غیرخطی برای پیش‌بین \lr{NMPC} در معماری ردیاب مسیر (\lr{CraneStateFcn.m})}}, label={code:nmpc_traj_state}]{../2_MATLAB_Simulations/4_NMPC_Trajectory/CraneStateFcn.m}
+\end{latin}
+
+\begin{latin}
+    \singlespacing
+    \lstinputlisting[language=MATLAB, caption={\rl{برنامه‌ریز مسیر سینماتیکی با قابلیت تولید آرایه افق پیش‌بینی برای \lr{NMPC} (\lr{TrajectoryGenerator.m})}}, label={code:traj_generator_nmpc}]{../2_MATLAB_Simulations/4_NMPC_Trajectory/TrajectoryGenerator.m}
 \end{latin}
