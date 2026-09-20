@@ -8,7 +8,7 @@ bc = 0.1;
 bp = 0.05;
 l0 = 0.5;
 theta0 = 0;
-x0 = -0.5; % or -5
+x0 = -0.5;
 
 % NMPC horizons and constraints
 Ts = 0.05;

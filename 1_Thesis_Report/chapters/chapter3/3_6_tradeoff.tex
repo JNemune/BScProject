@@ -29,24 +29,24 @@
 
 سیگنال‌های کنترلی تولیدشده (ورودی‌های پلنت) در شکل (\ref{fig:nmpc_basic_inputs}) رسم شده‌اند. مقادیر هر دو سیگنال به خوبی در بازهٔ نوسانی بین ۳- تا ۳ قرار گرفته‌اند که نشان می‌دهد عملگرها با حاشیهٔ امنیت بالایی درون محدوده‌های سخت‌افزاری تعریف‌شده ($50\mathrm{\ N}$ و $5\mathrm{\ m/s^2}$) عمل کرده و دچار اشباع (\lr{Saturation}) نشده‌اند.
 
-\begin{figure}[hbt!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/3_NMPC_Basic/plant_input_F_l_ddot.pdf}
-    \caption{سیگنال‌های کنترلی پایه: نیروی کالسکه (\lr{$F$}) و شتاب تغییر طول کابل (\lr{$\ddot{l}$})}
-    \label{fig:nmpc_basic_inputs}
-\end{figure}
+% \begin{figure}[hbt!]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{images/3_NMPC_Basic/plant_input_F_l_ddot.pdf}
+%     \caption{سیگنال‌های کنترلی پایه: نیروی کالسکه (\lr{$F$}) و شتاب تغییر طول کابل (\lr{$\ddot{l}$})}
+%     \label{fig:nmpc_basic_inputs}
+% \end{figure}
 
 % Need for Trajectory and Interference Paradox
 \subsection{ضرورت استفاده از برنامه‌ریز مسیر و چالش تداخل فیدفوروارد}
 
 اعمال یکبارهٔ خطای بزرگ موقعیت ($e = x_{ref} - x_0$) به شکل پله برای جابجایی‌های طولانی‌تر (نظیر ۵ متر)، کنترل‌کننده را وادار به درخواست حداکثر نیروی ممکن در لحظهٔ آغازین می‌کند. این امر به اشباع سریع عملگرها و تولید سیگنال‌های نوسانی و در نهایت ناپایداری سیستم می‌انجامد. برای حل این مشکل، مرجع پله به یک پروفایل حرکتی کاملاً نرم (\lr{S-Curve}) تبدیل شد (شکل \ref{fig:nmpc_traj_ref}).
 
-\begin{figure}[hbt!]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/4_NMPC_Trajectory/MPC_TRAJ_REF.pdf}
-    \caption{پروفایل مسیر مرجع نرم تولیدشده توسط برنامه‌ریز سینماتیکی}
-    \label{fig:nmpc_traj_ref}
-\end{figure}
+% \begin{figure}[hbt!]
+%     \centering
+%     \includegraphics[width=0.75\textwidth]{images/4_NMPC_Trajectory/MPC_TRAJ_REF.pdf}
+%     \caption{پروفایل مسیر مرجع نرم تولیدشده توسط برنامه‌ریز سینماتیکی}
+%     \label{fig:nmpc_traj_ref}
+% \end{figure}
 
 در فاز توسعهٔ این معماری، تلاش شد تا فیدفوروارد تحلیلی در کنار \lr{NMPC} پیاده‌سازی شود. اما این رویکرد به دلیل یک پارادوکس بنیادین با شکست مواجه شد: هدف اصلی \lr{NMPC} حفظ زاویهٔ نوسان در مقدار صفر است. با اعمال نیروی فیدفوروارد، سیستم شروع به شتاب‌گیری می‌کند و \lr{NMPC} با پیش‌بینی انحراف قطعی آونگ، از طریق اعمال یک نیروی منفی شدید با فیدفوروارد مقابله کرده و مانع حرکت کالسکه می‌شود.
 
