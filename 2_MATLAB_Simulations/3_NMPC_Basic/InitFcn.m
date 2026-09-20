@@ -1,6 +1,6 @@
 clear; clc; close all;
 
-% --- 1. System Parameters ---
+% System parameters
 m = 0.2;
 M = 1;
 g = 9.81;
@@ -8,7 +8,7 @@ bc = 0.1;
 bp = 0.05;
 l0 = 0.5;
 theta0 = 0;
-x0 = -0.5;
+x0 = -0.5; % or -5
 
 % NMPC horizons and constraints
 Ts = 0.05;
@@ -32,20 +32,28 @@ nlobj.Ts = Ts;
 nlobj.PredictionHorizon = prediction_horizon;
 nlobj.ControlHorizon = control_horizon;
 
-% Set state constraints
+% Set HARD state constraints
 nlobj.States(3).Min = theta_min; nlobj.States(3).Max = theta_max;
 nlobj.States(5).Min = l_min; nlobj.States(5).Max = l_max;
 
-% Set MV constraints
+% Set MV hard constraints
 nlobj.MV(1).Min = f_min; nlobj.MV(1).Max = f_max;
 nlobj.MV(2).Min = l_ddot_min; nlobj.MV(2).Max = l_ddot_max;
 
-% Tuning weights (Aligned with LQR: Q = diag([1000, 10, 500, 10]), R = 1)
+% Distance-Invariant Tuning Weights
 % OutputVariables: [x, x_dot, theta, theta_dot, l, l_dot]
-nlobj.Weights.OutputVariables = [1000, 10, 500, 10, 50, 10];
+% x weight reduced to allow tracking flexibility without constraint violation
+nlobj.Weights.OutputVariables = [150, 20, 300, 20, 50, 10];
 
 % ManipulatedVariables: [F, l_ddot]
 nlobj.Weights.ManipulatedVariables = [1, 1];
 
 % ManipulatedVariablesRate: [F_rate, l_ddot_rate]
-nlobj.Weights.ManipulatedVariablesRate = [50, 50];
+% Heavily penalized to enforce smooth control actions, preventing hard constraint hits
+nlobj.Weights.ManipulatedVariablesRate = [150, 150];
+
+% Optimization solver settings
+nlobj.Optimization.SolverOptions.Algorithm = 'sqp';
+nlobj.Optimization.SolverOptions.MaxIterations = 200;
+% Increase tolerance slightly to help the solver in tight constraint scenarios
+nlobj.Optimization.SolverOptions.StepTolerance = 1e-4;
