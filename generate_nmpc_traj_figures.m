@@ -1,6 +1,6 @@
 % generate_nmpc_traj_figures.m
 % Targeted Figure Generation for NMPC Trajectory (Chapter 3)
-% Generates exactly 5 publication-quality PDF figures.
+% Generates exactly 5 publication-quality PDF figures with signal extension.
 
 function generate_nmpc_traj_figures()
     clc; close all; warning('off', 'MATLAB:hg:AutoSoftwareOpenGL');
@@ -106,6 +106,14 @@ function gen_nmpc_traj_plots(data, out)
         Ref = data.ref.(d_fld);
         sfx = suffixes{i};
 
+        % --- EXTEND NMPC SIGNALS TO MATCH REFERENCE TIME (e.g., up to 12s) ---
+        t_end_ref = max(Ref.x.x);
+        D.x = extend_signal(D.x, t_end_ref);
+        D.theta = extend_signal(D.theta, t_end_ref);
+        D.l = extend_signal(D.l, t_end_ref);
+        D.F = extend_signal(D.F, t_end_ref);
+        D.l_ddot = extend_signal(D.l_ddot, t_end_ref);
+
         % ---------------------------------------------------------
         % FIGURE 1 & 3: MPC_TRAJ_x_theta_l.pdf / MPC_TRAJ_x_theta_l_5.pdf
         % ---------------------------------------------------------
@@ -142,7 +150,7 @@ function gen_nmpc_traj_plots(data, out)
         % Subplot 1: Force (F)
         ax4 = nexttile(tl2); hold on;
         plot(D.F.x, D.F.y, 'Color', c_nmpc, 'LineWidth', 1.8);
-        add_lims(ax4, [-5 5]);
+        add_lims(ax4, [-50 50]); % Corrected force limit to +/- 50 N
         format_ax(ax4, '', 'Force $F$ (N)');
 
         % Subplot 2: Winch Acceleration (l_ddot)
@@ -196,6 +204,21 @@ end
 %% ========================================================================
 %  CORE HELPER FUNCTIONS
 %  ========================================================================
+
+function sig_out = extend_signal(sig, t_end)
+    % Extends the signal by holding its final value up to t_end
+    sig_out = sig;
+
+    if ~isempty(sig) && ~isempty(sig.x)
+
+        if max(sig.x) < t_end
+            sig_out.x = [sig.x(:); t_end];
+            sig_out.y = [sig.y(:); sig.y(end)];
+        end
+
+    end
+
+end
 
 function [extr, stat, msg] = extract_fig_data(path)
     extr = {}; stat = 0; msg = '';
